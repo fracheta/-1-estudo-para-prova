@@ -173,7 +173,7 @@
             padding-bottom: 0.5rem;
         }
 
-        /* Estilo de livro */
+        /* Estilo de livro simplificado (apenas lombada) */
         .book-link {
             text-decoration: none;
             color: inherit;
@@ -191,8 +191,8 @@
         }
 
         .book:hover {
-            transform: translateY(-10px) rotateY(-5deg);
-            box-shadow: -10px 15px 25px rgba(0, 0, 0, 0.7);
+            transform: translateY(-12px) rotateY(-3deg);
+            box-shadow: -8px 18px 30px rgba(0, 0, 0, 0.8);
         }
 
         /* Lombada do livro */
@@ -212,12 +212,13 @@
             padding: 1rem;
             text-align: center;
             border-left: 6px solid var(--accent-gold);
-            transform-origin: left center;
-            transition: background 0.3s;
+            transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
         }
 
         .book:hover .book-spine {
             background: linear-gradient(135deg, #3d2b5a, #5e4a7c);
+            border-left-color: #ffb84d;
+            box-shadow: 3px 8px 20px rgba(0,0,0,0.8);
         }
 
         .book-spine i {
@@ -227,6 +228,11 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            transition: transform 0.3s;
+        }
+
+        .book:hover .book-spine i {
+            transform: scale(1.1);
         }
 
         .book-spine h3 {
@@ -254,49 +260,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Capa (frente) que aparece ao girar */
-        .book-cover {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(145deg, #1a1f3a, #252b45);
-            border-radius: 5px 10px 10px 5px;
-            box-shadow: 2px 5px 15px rgba(0,0,0,0.6);
-            transform: rotateY(90deg);
-            transform-origin: left center;
-            transition: transform 0.4s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-            text-align: center;
-            backface-visibility: hidden;
-        }
-
-        .book:hover .book-cover {
-            transform: rotateY(0deg);
-        }
-
-        .book-cover i {
-            font-size: 2.5rem;
-            color: var(--accent-gold);
-            margin-bottom: 0.8rem;
-        }
-
-        .book-cover h4 {
-            font-size: 1rem;
-            color: #fff;
-            margin-bottom: 0.3rem;
-        }
-
-        .book-cover small {
-            color: #94a3b8;
-            font-size: 0.7rem;
-        }
-
         /* Ajuste para mobile */
         @media (max-width: 700px) {
             .book-link {
@@ -311,9 +274,6 @@
             }
             .book-spine h3 {
                 font-size: 0.7rem;
-            }
-            .book-cover i {
-                font-size: 2rem;
             }
         }
 
@@ -365,11 +325,6 @@
                                 <h3>Arte</h3>
                                 <span class="tag">PDF</span>
                             </div>
-                            <div class="book-cover">
-                                <i class="fas fa-paint-brush"></i>
-                                <h4>Arte</h4>
-                                <small>Apostilas e resumos</small>
-                            </div>
                         </div>
                     </a>
                     <a href="material-educacao-fisica.html" class="book-link">
@@ -378,11 +333,6 @@
                                 <i class="fas fa-running"></i>
                                 <h3>Educ. Física</h3>
                                 <span class="tag">PDF</span>
-                            </div>
-                            <div class="book-cover">
-                                <i class="fas fa-running"></i>
-                                <h4>Educação Física</h4>
-                                <small>Esquemas visuais</small>
                             </div>
                         </div>
                     </a>
@@ -393,11 +343,6 @@
                                 <h3>Espanhol</h3>
                                 <span class="tag">PDF</span>
                             </div>
-                            <div class="book-cover">
-                                <i class="fas fa-globe"></i>
-                                <h4>Língua Espanhola</h4>
-                                <small>Gramática e vocabulário</small>
-                            </div>
                         </div>
                     </a>
                     <a href="material-ingles.html" class="book-link">
@@ -406,11 +351,6 @@
                                 <i class="fas fa-flag-usa"></i>
                                 <h3>Inglês</h3>
                                 <span class="tag">PDF</span>
-                            </div>
-                            <div class="book-cover">
-                                <i class="fas fa-flag-usa"></i>
-                                <h4>Língua Inglesa</h4>
-                                <small>Textos e exercícios</small>
                             </div>
                         </div>
                     </a>
@@ -421,11 +361,6 @@
                                 <h3>Português</h3>
                                 <span class="tag">PDF</span>
                             </div>
-                            <div class="book-cover">
-                                <i class="fas fa-comment-alt"></i>
-                                <h4>Língua Portuguesa</h4>
-                                <small>Gramática e redação</small>
-                            </div>
                         </div>
                     </a>
                     <a href="material-literatura.html" class="book-link">
@@ -435,11 +370,6 @@
                                 <h3>Literatura</h3>
                                 <span class="tag">PDF</span>
                             </div>
-                            <div class="book-cover">
-                                <i class="fas fa-book"></i>
-                                <h4>Literatura</h4>
-                                <small>Análises de obras</small>
-                            </div>
                         </div>
                     </a>
                     <a href="material-redacao.html" class="book-link">
@@ -448,11 +378,6 @@
                                 <i class="fas fa-pen"></i>
                                 <h3>Redação</h3>
                                 <span class="tag">PDF</span>
-                            </div>
-                            <div class="book-cover">
-                                <i class="fas fa-pen"></i>
-                                <h4>Redação</h4>
-                                <small>Modelos e dicas</small>
                             </div>
                         </div>
                     </a>
@@ -473,11 +398,6 @@
                                 <h3>Biologia</h3>
                                 <span class="tag">PDF</span>
                             </div>
-                            <div class="book-cover">
-                                <i class="fas fa-dna"></i>
-                                <h4>Biologia</h4>
-                                <small>Resumos ilustrados</small>
-                            </div>
                         </div>
                     </a>
                     <a href="material-fisica.html" class="book-link">
@@ -487,11 +407,6 @@
                                 <h3>Física</h3>
                                 <span class="tag">PDF</span>
                             </div>
-                            <div class="book-cover">
-                                <i class="fas fa-atom"></i>
-                                <h4>Física</h4>
-                                <small>Fórmulas e explicações</small>
-                            </div>
                         </div>
                     </a>
                     <a href="material-quimica.html" class="book-link">
@@ -500,11 +415,6 @@
                                 <i class="fas fa-flask"></i>
                                 <h3>Química</h3>
                                 <span class="tag">PDF</span>
-                            </div>
-                            <div class="book-cover">
-                                <i class="fas fa-flask"></i>
-                                <h4>Química</h4>
-                                <small>Tabelas e reações</small>
                             </div>
                         </div>
                     </a>
@@ -525,11 +435,6 @@
                                 <h3>Filosofia</h3>
                                 <span class="tag">PDF</span>
                             </div>
-                            <div class="book-cover">
-                                <i class="fas fa-brain"></i>
-                                <h4>Filosofia</h4>
-                                <small>Mapas mentais</small>
-                            </div>
                         </div>
                     </a>
                     <a href="material-geografia.html" class="book-link">
@@ -538,11 +443,6 @@
                                 <i class="fas fa-mountain"></i>
                                 <h3>Geografia</h3>
                                 <span class="tag">PDF</span>
-                            </div>
-                            <div class="book-cover">
-                                <i class="fas fa-mountain"></i>
-                                <h4>Geografia</h4>
-                                <small>Infográficos</small>
                             </div>
                         </div>
                     </a>
@@ -553,11 +453,6 @@
                                 <h3>História</h3>
                                 <span class="tag">PDF</span>
                             </div>
-                            <div class="book-cover">
-                                <i class="fas fa-landmark"></i>
-                                <h4>História</h4>
-                                <small>Linhas do tempo</small>
-                            </div>
                         </div>
                     </a>
                     <a href="material-sociologia.html" class="book-link">
@@ -566,11 +461,6 @@
                                 <i class="fas fa-users"></i>
                                 <h3>Sociologia</h3>
                                 <span class="tag">PDF</span>
-                            </div>
-                            <div class="book-cover">
-                                <i class="fas fa-users"></i>
-                                <h4>Sociologia</h4>
-                                <small>Textos clássicos</small>
                             </div>
                         </div>
                     </a>
@@ -591,11 +481,6 @@
                                 <h3>Matemática</h3>
                                 <span class="tag">PDF</span>
                             </div>
-                            <div class="book-cover">
-                                <i class="fas fa-square-root-alt"></i>
-                                <h4>Matemática</h4>
-                                <small>Fórmulas e exercícios</small>
-                            </div>
                         </div>
                     </a>
                 </div>
@@ -603,7 +488,7 @@
         </div>
 
         <!-- Rodapé -->
-        <footer class="footer" style="text-align: center; color: #64748b; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05);">
+        <footer style="text-align: center; color: #64748b; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05);">
             <p>© 2026 Estudos+ | Sua biblioteca digital para o ENEM</p>
         </footer>
     </div>
