@@ -1,1 +1,621 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estuda+ | Arte para o ENEM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #0b0c17;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent-purple: #8b5cf6;
+            --accent-gold: #f59e0b;
+            --accent-coral: #ff6b6b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --radius-xl: 24px;
+            --radius-lg: 18px;
+            --transition: all 0.3s ease;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: radial-gradient(ellipse at top, #1a1f3a, #0b0c17 70%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 1.5rem 1rem 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #c084fc, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .logo i {
+            background: none;
+            -webkit-text-fill-color: #c084fc;
+            font-size: 2rem;
+        }
+
+        .voltar {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .voltar:hover {
+            color: #fff;
+        }
+
+        /* Banner da matéria */
+        .materia-banner {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(245, 158, 11, 0.15));
+            border-radius: var(--radius-xl);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .materia-icon {
+            font-size: 4rem;
+            color: var(--accent-purple);
+        }
+
+        .materia-info h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .materia-info p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        .materia-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .stat-item i {
+            color: var(--accent-gold);
+        }
+
+        /* Conteúdo principal */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Seção */
+        .section {
+            background: rgba(255, 255, 255, 0.025);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            padding: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .section-title i {
+            color: var(--accent-purple);
+        }
+
+        /* Lista de aulas */
+        .aulas-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .aula-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            transition: var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .aula-item:hover {
+            background: rgba(139, 92, 246, 0.1);
+            border-color: rgba(139, 92, 246, 0.3);
+            transform: translateX(5px);
+        }
+
+        .aula-numero {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #8b5cf6, #f59e0b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .aula-info {
+            flex: 1;
+        }
+
+        .aula-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .aula-info span {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .aula-duracao {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--accent-gold);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Player de vídeo destaque */
+        .video-destaque {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #2d1f4e, #1a1f3a);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .video-placeholder:hover {
+            background: linear-gradient(135deg, #3d2b5a, #252b45);
+        }
+
+        .play-btn {
+            width: 70px;
+            height: 70px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: #fff;
+            transition: var(--transition);
+        }
+
+        .video-placeholder:hover .play-btn {
+            background: rgba(139, 92, 246, 0.3);
+            border-color: var(--accent-purple);
+            transform: scale(1.1);
+        }
+
+        .video-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Tags / Tópicos */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #c4b5fd;
+        }
+
+        /* Recursos */
+        .recursos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.8rem;
+        }
+
+        .recurso-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            padding: 1.2rem;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .recurso-card:hover {
+            background: rgba(139, 92, 246, 0.1);
+            border-color: rgba(139, 92, 246, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .recurso-card i {
+            font-size: 1.8rem;
+            color: var(--accent-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .recurso-card h5 {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .recurso-card small {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: #64748b;
+            font-size: 0.8rem;
+            padding: 2rem 0 1rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <a href="10.html" class="logo">
+                <i class="fas fa-brain"></i> Estuda+
+            </a>
+            <a href="20.html" class="voltar">
+                <i class="fas fa-arrow-left"></i> Voltar para Aulas
+            </a>
+        </header>
+
+        <!-- Banner da Matéria -->
+        <div class="materia-banner">
+            <div class="materia-icon">
+                <i class="fas fa-paint-brush"></i>
+            </div>
+            <div class="materia-info">
+                <h1>Arte</h1>
+                <p>Explore a história da arte, movimentos artísticos, estética e cultura para arrasar nas questões do ENEM.</p>
+                <div class="materia-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-video"></i>
+                        <span>12 aulas em vídeo</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-clock"></i>
+                        <span>~6 horas de conteúdo</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>Material complementar</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tags de tópicos -->
+        <div class="tags">
+            <span class="tag">História da Arte</span>
+            <span class="tag">Vanguardas Europeias</span>
+            <span class="tag">Arte Brasileira</span>
+            <span class="tag">Semana de 22</span>
+            <span class="tag">Arte Contemporânea</span>
+            <span class="tag">Cultura e Sociedade</span>
+        </div>
+
+        <!-- Conteúdo principal -->
+        <div class="content-grid">
+            <!-- Coluna da esquerda: Lista de aulas -->
+            <div>
+                <div class="section">
+                    <h2 class="section-title">
+                        <i class="fas fa-list-ol"></i> Aulas
+                    </h2>
+                    <div class="aulas-list">
+                        <!-- Aula 1 -->
+                        <a href="#" class="aula-item">
+                            <div class="aula-numero">1</div>
+                            <div class="aula-info">
+                                <h4>Introdução à História da Arte</h4>
+                                <span>Conceitos básicos, periodização e função da arte</span>
+                            </div>
+                            <div class="aula-duracao">
+                                <i class="far fa-clock"></i> 28min
+                            </div>
+                        </a>
+
+                        <!-- Aula 2 -->
+                        <a href="#" class="aula-item">
+                            <div class="aula-numero">2</div>
+                            <div class="aula-info">
+                                <h4>Arte na Pré-História e Antiguidade</h4>
+                                <span>Pinturas rupestres, Egito, Grécia e Roma</span>
+                            </div>
+                            <div class="aula-duracao">
+                                <i class="far fa-clock"></i> 32min
+                            </div>
+                        </a>
+
+                        <!-- Aula 3 -->
+                        <a href="#" class="aula-item">
+                            <div class="aula-numero">3</div>
+                            <div class="aula-info">
+                                <h4>Arte Medieval: Românica e Gótica</h4>
+                                <span>Arte sacra, vitrais, catedrais e iluminuras</span>
+                            </div>
+                            <div class="aula-duracao">
+                                <i class="far fa-clock"></i> 25min
+                            </div>
+                        </a>
+
+                        <!-- Aula 4 -->
+                        <a href="#" class="aula-item">
+                            <div class="aula-numero">4</div>
+                            <div class="aula-info">
+                                <h4>Renascimento e Humanismo</h4>
+                                <span>Leonardo da Vinci, Michelangelo, Rafael e Botticelli</span>
+                            </div>
+                            <div class="aula-duracao">
+                                <i class="far fa-clock"></i> 35min
+                            </div>
+                        </a>
+
+                        <!-- Aula 5 -->
+                        <a href="#" class="aula-item">
+                            <div class="aula-numero">5</div>
+                            <div class="aula-info">
+                                <h4>Barroco e Rococó</h4>
+                                <span>Caravaggio, Bernini, Aleijadinho e Mestre Ataíde</span>
+                            </div>
+                            <div class="aula-duracao">
+                                <i class="far fa-clock"></i> 30min
+                            </div>
+                        </a>
+
+                        <!-- Aula 6 -->
+                        <a href="#" class="aula-item">
+                            <div class="aula-numero">6</div>
+                            <div class="aula-info">
+                                <h4>Neoclassicismo e Romantismo</h4>
+                                <span>David, Delacroix, Goya e a Missão Francesa no Brasil</span>
+                            </div>
+                            <div class="aula-duracao">
+                                <i class="far fa-clock"></i> 28min
+                            </div>
+                        </a>
+
+                        <!-- Aula 7 -->
+                        <a href="#" class="aula-item">
+                            <div class="aula-numero">7</div>
+                            <div class="aula-info">
+                                <h4>Realismo e Impressionismo</h4>
+                                <span>Courbet, Monet, Renoir e as transformações da arte</span>
+                            </div>
+                            <div class="aula-duracao">
+                                <i class="far fa-clock"></i> 32min
+                            </div>
+                        </a>
+
+                        <!-- Aula 8 -->
+                        <a href="#" class="aula-item">
+                            <div class="aula-numero">8</div>
+                            <div class="aula-info">
+                                <h4>Vanguardas Europeias</h4>
+                                <span>Cubismo, Futurismo, Dadaísmo, Surrealismo e Expressionismo</span>
+                            </div>
+                            <div class="aula-duracao">
+                                <i class="far fa-clock"></i> 40min
+                            </div>
+                        </a>
+
+                        <!-- Aula 9 -->
+                        <a href="#" class="aula-item">
+                            <div class="aula-numero">9</div>
+                            <div class="aula-info">
+                                <h4>Semana de Arte Moderna de 1922</h4>
+                                <span>Tarsila do Amaral, Anita Malfatti, Mário de Andrade e Oswald de Andrade</span>
+                            </div>
+                            <div class="aula-duracao">
+                                <i class="far fa-clock"></i> 35min
+                            </div>
+                        </a>
+
+                        <!-- Aula 10 -->
+                        <a href="#" class="aula-item">
+                            <div class="aula-numero">10</div>
+                            <div class="aula-info">
+                                <h4>Arte Brasileira Moderna e Contemporânea</h4>
+                                <span>Portinari, Di Cavalcanti, Hélio Oiticica, Lygia Clark e arte atual</span>
+                            </div>
+                            <div class="aula-duracao">
+                                <i class="far fa-clock"></i> 38min
+                            </div>
+                        </a>
+
+                        <!-- Aula 11 -->
+                        <a href="#" class="aula-item">
+                            <div class="aula-numero">11</div>
+                            <div class="aula-info">
+                                <h4>Arte e Cultura Popular no Brasil</h4>
+                                <span>Folclore, artesanato, festas populares e patrimônio imaterial</span>
+                            </div>
+                            <div class="aula-duracao">
+                                <i class="far fa-clock"></i> 22min
+                            </div>
+                        </a>
+
+                        <!-- Aula 12 -->
+                        <a href="#" class="aula-item">
+                            <div class="aula-numero">12</div>
+                            <div class="aula-info">
+                                <h4>Revisão ENEM: Arte em Foco</h4>
+                                <span>Resumo dos principais temas e resolução de questões</span>
+                            </div>
+                            <div class="aula-duracao">
+                                <i class="far fa-clock"></i> 45min
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coluna da direita: Vídeo em destaque e recursos -->
+            <div>
+                <!-- Vídeo em destaque -->
+                <div class="section">
+                    <h2 class="section-title">
+                        <i class="fas fa-play-circle"></i> Aula em Destaque
+                    </h2>
+                    <div class="video-destaque">
+                        <div class="video-placeholder" onclick="alert('🎬 O vídeo seria carregado aqui! No projeto real, você pode incorporar vídeos do YouTube ou Vimeo.')">
+                            <div class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <span class="video-label">Clique para assistir</span>
+                        </div>
+                    </div>
+                    <h4 style="margin-bottom: 0.3rem;">Vanguardas Europeias</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+                        Aula completa sobre os movimentos que revolucionaram a arte no início do século XX. Tema essencial para o ENEM!
+                    </p>
+                </div>
+
+                <!-- Recursos de estudo -->
+                <div class="section">
+                    <h2 class="section-title">
+                        <i class="fas fa-tools"></i> Recursos de Estudo
+                    </h2>
+                    <div class="recursos-grid">
+                        <a href="../30.html" class="recurso-card">
+                            <i class="fas fa-file-pdf"></i>
+                            <h5>Material em PDF</h5>
+                            <small>Apostila completa</small>
+                        </a>
+                        <a href="#" class="recurso-card">
+                            <i class="fas fa-question-circle"></i>
+                            <h5>Exercícios</h5>
+                            <small>Questões do ENEM</small>
+                        </a>
+                        <a href="#" class="recurso-card">
+                            <i class="fas fa-brain"></i>
+                            <h5>Mapa Mental</h5>
+                            <small>Resumo visual</small>
+                        </a>
+                        <a href="../40.html" class="recurso-card">
+                            <i class="fas fa-robot"></i>
+                            <h5>Tirar Dúvidas</h5>
+                            <small>IA do Estuda+</small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2026 Estuda+ | Arte para o ENEM</p>
+        </footer>
+    </div>
+</body>
+</html>
