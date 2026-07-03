@@ -13,10 +13,12 @@
             --accent-purple: #8b5cf6;
             --accent-gold: #f59e0b;
             --accent-coral: #ff6b6b;
+            --accent-green: #10b981;
             --text-primary: #f1f5f9;
             --text-secondary: #94a3b8;
             --radius-xl: 24px;
             --radius-lg: 18px;
+            --radius-md: 12px;
             --transition: all 0.3s ease;
         }
 
@@ -39,7 +41,7 @@
 
         .container {
             width: 100%;
-            max-width: 1100px;
+            max-width: 1200px;
         }
 
         /* Header */
@@ -81,16 +83,14 @@
             transition: color 0.3s;
         }
 
-        .voltar:hover {
-            color: #fff;
-        }
+        .voltar:hover { color: #fff; }
 
-        /* Banner da matéria */
+        /* Banner */
         .materia-banner {
             background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(245, 158, 11, 0.15));
             border-radius: var(--radius-xl);
-            padding: 2rem 2.5rem;
-            margin-bottom: 2.5rem;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
             border: 1px solid rgba(139, 92, 246, 0.3);
             display: flex;
             align-items: center;
@@ -99,12 +99,11 @@
         }
 
         .materia-icon {
-            font-size: 4rem;
-            color: var(--accent-purple);
+            font-size: 5rem;
         }
 
         .materia-info h1 {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
         }
@@ -130,220 +129,153 @@
             font-size: 0.9rem;
         }
 
-        .stat-item i {
-            color: var(--accent-gold);
-        }
+        .stat-item i { color: var(--accent-gold); }
 
-        /* Conteúdo principal */
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Seção */
+        /* Seções */
         .section {
-            background: rgba(255, 255, 255, 0.025);
+            background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(12px);
             border: 1px solid var(--glass-border);
             border-radius: var(--radius-xl);
-            padding: 1.8rem;
+            padding: 2rem;
             margin-bottom: 2rem;
         }
 
-        .section-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
+        .section-header {
             display: flex;
             align-items: center;
-            gap: 0.6rem;
-            padding-bottom: 0.8rem;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
             border-bottom: 1px solid rgba(255,255,255,0.06);
         }
 
-        .section-title i {
+        .section-header i {
+            font-size: 1.8rem;
             color: var(--accent-purple);
         }
 
-        /* Lista de aulas */
-        .aulas-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
+        .section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
         }
 
-        .aula-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem 1.2rem;
+        .badge {
+            background: rgba(139, 92, 246, 0.2);
+            color: #c4b5fd;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Tópicos */
+        .topicos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .topico-card {
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: var(--radius-lg);
+            padding: 1.5rem;
             transition: var(--transition);
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
         }
 
-        .aula-item:hover {
-            background: rgba(139, 92, 246, 0.1);
-            border-color: rgba(139, 92, 246, 0.3);
-            transform: translateX(5px);
+        .topico-card:hover {
+            background: rgba(139, 92, 246, 0.08);
+            border-color: rgba(139, 92, 246, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
 
-        .aula-numero {
-            width: 40px;
-            height: 40px;
+        .topico-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .topico-icon {
+            width: 45px;
+            height: 45px;
             background: linear-gradient(135deg, #8b5cf6, #f59e0b);
-            border-radius: 50%;
+            border-radius: var(--radius-md);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 1.2rem;
             flex-shrink: 0;
         }
 
-        .aula-info {
-            flex: 1;
-        }
-
-        .aula-info h4 {
-            font-size: 1rem;
-            font-weight: 600;
+        .topico-titulo h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
             margin-bottom: 0.2rem;
         }
 
-        .aula-info span {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
+        .frequencia {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            font-weight: 600;
+            display: inline-block;
         }
 
-        .aula-duracao {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            color: var(--accent-gold);
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
+        .frequencia.alta { background: rgba(239, 68, 68, 0.2); color: #fca5a5; }
+        .frequencia.media { background: rgba(245, 158, 11, 0.2); color: #fcd34d; }
+        .frequencia.baixa { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; }
 
-        /* Player de vídeo destaque */
-        .video-destaque {
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-
-        .video-placeholder {
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: linear-gradient(135deg, #2d1f4e, #1a1f3a);
+        .subtopicos {
+            list-style: none;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            cursor: pointer;
-            transition: var(--transition);
-            position: relative;
+            gap: 0.3rem;
+            margin-bottom: 1rem;
         }
 
-        .video-placeholder:hover {
-            background: linear-gradient(135deg, #3d2b5a, #252b45);
-        }
-
-        .play-btn {
-            width: 70px;
-            height: 70px;
-            background: rgba(255,255,255,0.1);
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
+        .subtopico-item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            color: #fff;
-            transition: var(--transition);
-        }
-
-        .video-placeholder:hover .play-btn {
-            background: rgba(139, 92, 246, 0.3);
-            border-color: var(--accent-purple);
-            transform: scale(1.1);
-        }
-
-        .video-label {
-            font-size: 0.9rem;
+            gap: 0.5rem;
+            padding: 0.3rem 0;
+            font-size: 0.88rem;
             color: var(--text-secondary);
         }
 
-        /* Tags / Tópicos */
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
+        .subtopico-item i {
+            font-size: 0.5rem;
+            color: var(--accent-gold);
+        }
+
+        /* Botão de aula */
+        .btn-aula {
+            display: inline-flex;
+            align-items: center;
             gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .tag {
-            background: rgba(139, 92, 246, 0.15);
-            border: 1px solid rgba(139, 92, 246, 0.3);
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: #c4b5fd;
-        }
-
-        /* Recursos */
-        .recursos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 0.8rem;
-        }
-
-        .recurso-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: var(--radius-lg);
-            padding: 1.2rem;
-            text-align: center;
-            transition: var(--transition);
-            cursor: pointer;
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            color: #fff;
             text-decoration: none;
-            color: inherit;
-        }
-
-        .recurso-card:hover {
-            background: rgba(139, 92, 246, 0.1);
-            border-color: rgba(139, 92, 246, 0.3);
-            transform: translateY(-3px);
-        }
-
-        .recurso-card i {
-            font-size: 1.8rem;
-            color: var(--accent-purple);
-            margin-bottom: 0.5rem;
-        }
-
-        .recurso-card h5 {
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
             font-size: 0.85rem;
             font-weight: 600;
+            transition: var(--transition);
+            width: 100%;
+            justify-content: center;
+            margin-top: 0.5rem;
         }
 
-        .recurso-card small {
-            font-size: 0.7rem;
-            color: var(--text-secondary);
+        .btn-aula:hover {
+            background: linear-gradient(135deg, #9b6cf6, #7d38e9);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-aula i {
+            font-size: 0.9rem;
         }
 
         /* Footer */
@@ -354,6 +286,11 @@
             padding: 2rem 0 1rem;
             border-top: 1px solid rgba(255,255,255,0.05);
             margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .topicos-grid { grid-template-columns: 1fr; }
+            .materia-banner { padding: 1.5rem; text-align: center; justify-content: center; }
         }
     </style>
 </head>
@@ -369,246 +306,374 @@
             </a>
         </header>
 
-        <!-- Banner da Matéria -->
+        <!-- Banner -->
         <div class="materia-banner">
-            <div class="materia-icon">
-                <i class="fas fa-paint-brush"></i>
-            </div>
+            <div class="materia-icon">🎨</div>
             <div class="materia-info">
                 <h1>Arte</h1>
-                <p>Explore a história da arte, movimentos artísticos, estética e cultura para arrasar nas questões do ENEM.</p>
+                <p>Domine todos os conteúdos de Arte que caem no ENEM e vestibulares. Da Pré-História à Arte Contemporânea, com foco nos temas mais cobrados!</p>
                 <div class="materia-stats">
-                    <div class="stat-item">
-                        <i class="fas fa-video"></i>
-                        <span>12 aulas em vídeo</span>
-                    </div>
-                    <div class="stat-item">
-                        <i class="fas fa-clock"></i>
-                        <span>~6 horas de conteúdo</span>
-                    </div>
-                    <div class="stat-item">
-                        <i class="fas fa-file-pdf"></i>
-                        <span>Material complementar</span>
-                    </div>
+                    <div class="stat-item"><i class="fas fa-layer-group"></i> <span>6 módulos</span></div>
+                    <div class="stat-item"><i class="fas fa-list-check"></i> <span>24 tópicos</span></div>
+                    <div class="stat-item"><i class="fas fa-star"></i> <span>Foco ENEM</span></div>
                 </div>
             </div>
         </div>
 
-        <!-- Tags de tópicos -->
-        <div class="tags">
-            <span class="tag">História da Arte</span>
-            <span class="tag">Vanguardas Europeias</span>
-            <span class="tag">Arte Brasileira</span>
-            <span class="tag">Semana de 22</span>
-            <span class="tag">Arte Contemporânea</span>
-            <span class="tag">Cultura e Sociedade</span>
-        </div>
-
-        <!-- Conteúdo principal -->
-        <div class="content-grid">
-            <!-- Coluna da esquerda: Lista de aulas -->
-            <div>
-                <div class="section">
-                    <h2 class="section-title">
-                        <i class="fas fa-list-ol"></i> Aulas
-                    </h2>
-                    <div class="aulas-list">
-                        <!-- Aula 1 -->
-                        <a href="#" class="aula-item">
-                            <div class="aula-numero">1</div>
-                            <div class="aula-info">
-                                <h4>Introdução à História da Arte</h4>
-                                <span>Conceitos básicos, periodização e função da arte</span>
-                            </div>
-                            <div class="aula-duracao">
-                                <i class="far fa-clock"></i> 28min
-                            </div>
-                        </a>
-
-                        <!-- Aula 2 -->
-                        <a href="#" class="aula-item">
-                            <div class="aula-numero">2</div>
-                            <div class="aula-info">
-                                <h4>Arte na Pré-História e Antiguidade</h4>
-                                <span>Pinturas rupestres, Egito, Grécia e Roma</span>
-                            </div>
-                            <div class="aula-duracao">
-                                <i class="far fa-clock"></i> 32min
-                            </div>
-                        </a>
-
-                        <!-- Aula 3 -->
-                        <a href="#" class="aula-item">
-                            <div class="aula-numero">3</div>
-                            <div class="aula-info">
-                                <h4>Arte Medieval: Românica e Gótica</h4>
-                                <span>Arte sacra, vitrais, catedrais e iluminuras</span>
-                            </div>
-                            <div class="aula-duracao">
-                                <i class="far fa-clock"></i> 25min
-                            </div>
-                        </a>
-
-                        <!-- Aula 4 -->
-                        <a href="#" class="aula-item">
-                            <div class="aula-numero">4</div>
-                            <div class="aula-info">
-                                <h4>Renascimento e Humanismo</h4>
-                                <span>Leonardo da Vinci, Michelangelo, Rafael e Botticelli</span>
-                            </div>
-                            <div class="aula-duracao">
-                                <i class="far fa-clock"></i> 35min
-                            </div>
-                        </a>
-
-                        <!-- Aula 5 -->
-                        <a href="#" class="aula-item">
-                            <div class="aula-numero">5</div>
-                            <div class="aula-info">
-                                <h4>Barroco e Rococó</h4>
-                                <span>Caravaggio, Bernini, Aleijadinho e Mestre Ataíde</span>
-                            </div>
-                            <div class="aula-duracao">
-                                <i class="far fa-clock"></i> 30min
-                            </div>
-                        </a>
-
-                        <!-- Aula 6 -->
-                        <a href="#" class="aula-item">
-                            <div class="aula-numero">6</div>
-                            <div class="aula-info">
-                                <h4>Neoclassicismo e Romantismo</h4>
-                                <span>David, Delacroix, Goya e a Missão Francesa no Brasil</span>
-                            </div>
-                            <div class="aula-duracao">
-                                <i class="far fa-clock"></i> 28min
-                            </div>
-                        </a>
-
-                        <!-- Aula 7 -->
-                        <a href="#" class="aula-item">
-                            <div class="aula-numero">7</div>
-                            <div class="aula-info">
-                                <h4>Realismo e Impressionismo</h4>
-                                <span>Courbet, Monet, Renoir e as transformações da arte</span>
-                            </div>
-                            <div class="aula-duracao">
-                                <i class="far fa-clock"></i> 32min
-                            </div>
-                        </a>
-
-                        <!-- Aula 8 -->
-                        <a href="#" class="aula-item">
-                            <div class="aula-numero">8</div>
-                            <div class="aula-info">
-                                <h4>Vanguardas Europeias</h4>
-                                <span>Cubismo, Futurismo, Dadaísmo, Surrealismo e Expressionismo</span>
-                            </div>
-                            <div class="aula-duracao">
-                                <i class="far fa-clock"></i> 40min
-                            </div>
-                        </a>
-
-                        <!-- Aula 9 -->
-                        <a href="#" class="aula-item">
-                            <div class="aula-numero">9</div>
-                            <div class="aula-info">
-                                <h4>Semana de Arte Moderna de 1922</h4>
-                                <span>Tarsila do Amaral, Anita Malfatti, Mário de Andrade e Oswald de Andrade</span>
-                            </div>
-                            <div class="aula-duracao">
-                                <i class="far fa-clock"></i> 35min
-                            </div>
-                        </a>
-
-                        <!-- Aula 10 -->
-                        <a href="#" class="aula-item">
-                            <div class="aula-numero">10</div>
-                            <div class="aula-info">
-                                <h4>Arte Brasileira Moderna e Contemporânea</h4>
-                                <span>Portinari, Di Cavalcanti, Hélio Oiticica, Lygia Clark e arte atual</span>
-                            </div>
-                            <div class="aula-duracao">
-                                <i class="far fa-clock"></i> 38min
-                            </div>
-                        </a>
-
-                        <!-- Aula 11 -->
-                        <a href="#" class="aula-item">
-                            <div class="aula-numero">11</div>
-                            <div class="aula-info">
-                                <h4>Arte e Cultura Popular no Brasil</h4>
-                                <span>Folclore, artesanato, festas populares e patrimônio imaterial</span>
-                            </div>
-                            <div class="aula-duracao">
-                                <i class="far fa-clock"></i> 22min
-                            </div>
-                        </a>
-
-                        <!-- Aula 12 -->
-                        <a href="#" class="aula-item">
-                            <div class="aula-numero">12</div>
-                            <div class="aula-info">
-                                <h4>Revisão ENEM: Arte em Foco</h4>
-                                <span>Resumo dos principais temas e resolução de questões</span>
-                            </div>
-                            <div class="aula-duracao">
-                                <i class="far fa-clock"></i> 45min
-                            </div>
-                        </a>
-                    </div>
-                </div>
+        <!-- ==================== MÓDULO 1 ==================== -->
+        <div class="section" id="modulo1">
+            <div class="section-header">
+                <i class="fas fa-archway"></i>
+                <h2>Módulo 1: Pré-História e Antiguidade</h2>
+                <span class="badge">Cai no ENEM</span>
             </div>
+            <div class="topicos-grid">
 
-            <!-- Coluna da direita: Vídeo em destaque e recursos -->
-            <div>
-                <!-- Vídeo em destaque -->
-                <div class="section">
-                    <h2 class="section-title">
-                        <i class="fas fa-play-circle"></i> Aula em Destaque
-                    </h2>
-                    <div class="video-destaque">
-                        <div class="video-placeholder" onclick="alert('🎬 O vídeo seria carregado aqui! No projeto real, você pode incorporar vídeos do YouTube ou Vimeo.')">
-                            <div class="play-btn">
-                                <i class="fas fa-play"></i>
-                            </div>
-                            <span class="video-label">Clique para assistir</span>
+                <!-- Tópico 1.1 -->
+                <div class="topico-card">
+                    <div class="topico-header">
+                        <div class="topico-icon">🦴</div>
+                        <div class="topico-titulo">
+                            <h3>Arte na Pré-História</h3>
+                            <span class="frequencia media">Média frequência</span>
                         </div>
                     </div>
-                    <h4 style="margin-bottom: 0.3rem;">Vanguardas Europeias</h4>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
-                        Aula completa sobre os movimentos que revolucionaram a arte no início do século XX. Tema essencial para o ENEM!
-                    </p>
+                    <ul class="subtopicos">
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Arte rupestre: pinturas e gravuras</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Esculturas do Paleolítico (Vênus de Willendorf)</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Arte no Neolítico: cerâmica e arquitetura megalítica</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Stonehenge e menires</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Arte rupestre no Brasil (Serra da Capivara)</li>
+                    </ul>
+                    <!-- LINK DA AULA AQUI -->
+                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
                 </div>
 
-                <!-- Recursos de estudo -->
-                <div class="section">
-                    <h2 class="section-title">
-                        <i class="fas fa-tools"></i> Recursos de Estudo
-                    </h2>
-                    <div class="recursos-grid">
-                        <a href="../30.html" class="recurso-card">
-                            <i class="fas fa-file-pdf"></i>
-                            <h5>Material em PDF</h5>
-                            <small>Apostila completa</small>
-                        </a>
-                        <a href="#" class="recurso-card">
-                            <i class="fas fa-question-circle"></i>
-                            <h5>Exercícios</h5>
-                            <small>Questões do ENEM</small>
-                        </a>
-                        <a href="#" class="recurso-card">
-                            <i class="fas fa-brain"></i>
-                            <h5>Mapa Mental</h5>
-                            <small>Resumo visual</small>
-                        </a>
-                        <a href="../40.html" class="recurso-card">
-                            <i class="fas fa-robot"></i>
-                            <h5>Tirar Dúvidas</h5>
-                            <small>IA do Estuda+</small>
-                        </a>
+                <!-- Tópico 1.2 -->
+                <div class="topico-card">
+                    <div class="topico-header">
+                        <div class="topico-icon">🏺</div>
+                        <div class="topico-titulo">
+                            <h3>Arte Egípcia</h3>
+                            <span class="frequencia media">Média frequência</span>
+                        </div>
                     </div>
+                    <ul class="subtopicos">
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Lei da frontalidade</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Pintura mural e hieróglifos</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Escultura: faraós e esfinges</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Arquitetura: pirâmides e templos</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Simbologia e religiosidade</li>
+                    </ul>
+                    <!-- LINK DA AULA AQUI -->
+                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
                 </div>
+
+                <!-- Tópico 1.3 -->
+                <div class="topico-card">
+                    <div class="topico-header">
+                        <div class="topico-icon">🏛️</div>
+                        <div class="topico-titulo">
+                            <h3>Arte Grega</h3>
+                            <span class="frequencia alta">Alta frequência</span>
+                        </div>
+                    </div>
+                    <ul class="subtopicos">
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Períodos: Arcaico, Clássico e Helenístico</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Escultura: kouros, doríforo, Vênus de Milo</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Arquitetura: ordens Dórica, Jônica e Coríntia</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Partenon e Acrópole</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Teatro grego: tragédia e comédia</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Cerâmica grega (vasos decorados)</li>
+                    </ul>
+                    <!-- LINK DA AULA AQUI -->
+                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                </div>
+
+                <!-- Tópico 1.4 -->
+                <div class="topico-card">
+                    <div class="topico-header">
+                        <div class="topico-icon">🏗️</div>
+                        <div class="topico-titulo">
+                            <h3>Arte Romana</h3>
+                            <span class="frequencia baixa">Baixa frequência</span>
+                        </div>
+                    </div>
+                    <ul class="subtopicos">
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Influência da arte grega</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Realismo na escultura (retratos)</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Arquitetura: arco, abóbada, aquedutos</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Coliseu e Panteão</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Mosaicos e afrescos (Pompeia)</li>
+                    </ul>
+                    <!-- LINK DA AULA AQUI -->
+                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ==================== MÓDULO 2 ==================== -->
+        <div class="section" id="modulo2">
+            <div class="section-header">
+                <i class="fas fa-church"></i>
+                <h2>Módulo 2: Arte Medieval e Renascentista</h2>
+                <span class="badge">Cai no ENEM</span>
+            </div>
+            <div class="topicos-grid">
+
+                <!-- Tópico 2.1 -->
+                <div class="topico-card">
+                    <div class="topico-header">
+                        <div class="topico-icon">⛪</div>
+                        <div class="topico-titulo">
+                            <h3>Arte Medieval: Românica e Gótica</h3>
+                            <span class="frequencia media">Média frequência</span>
+                        </div>
+                    </div>
+                    <ul class="subtopicos">
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Arte sacra e teocentrismo</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Estilo Românico: igrejas fortificadas, pouca luz</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Estilo Gótico: catedrais, vitrais, rosáceas</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Iluminuras e manuscritos</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Notre-Dame e Catedral de Chartres</li>
+                    </ul>
+                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                </div>
+
+                <!-- Tópico 2.2 -->
+                <div class="topico-card">
+                    <div class="topico-header">
+                        <div class="topico-icon">🎭</div>
+                        <div class="topico-titulo">
+                            <h3>Renascimento</h3>
+                            <span class="frequencia alta">Alta frequência</span>
+                        </div>
+                    </div>
+                    <ul class="subtopicos">
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Humanismo e antropocentrismo</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Perspectiva e proporção</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Leonardo da Vinci: Mona Lisa, Última Ceia</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Michelangelo: Davi, Capela Sistina</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Rafael Sanzio: Escola de Atenas</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Botticelli: O Nascimento de Vênus</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Mecenato e famílias poderosas (Medici)</li>
+                    </ul>
+                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                </div>
+
+                <!-- Tópico 2.3 -->
+                <div class="topico-card">
+                    <div class="topico-header">
+                        <div class="topico-icon">🖌️</div>
+                        <div class="topico-titulo">
+                            <h3>Barroco</h3>
+                            <span class="frequencia alta">Alta frequência</span>
+                        </div>
+                    </div>
+                    <ul class="subtopicos">
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Dramaticidade, contraste luz/sombra (claro-escuro)</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Caravaggio: tenebrismo</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Bernini: escultura barroca</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Velázquez e Rubens</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Barroco no Brasil: Aleijadinho e Mestre Ataíde</li>
+                    </ul>
+                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                </div>
+
+                <!-- Tópico 2.4 -->
+                <div class="topico-card">
+                    <div class="topico-header">
+                        <div class="topico-icon">🌸</div>
+                        <div class="topico-titulo">
+                            <h3>Rococó</h3>
+                            <span class="frequencia baixa">Baixa frequência</span>
+                        </div>
+                    </div>
+                    <ul class="subtopicos">
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Leveza, cores pastéis, temas galantes</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Decoração de interiores e ornamentação</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Watteau, Fragonard e Boucher</li>
+                    </ul>
+                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ==================== MÓDULO 3 ==================== -->
+        <div class="section" id="modulo3">
+            <div class="section-header">
+                <i class="fas fa-bolt"></i>
+                <h2>Módulo 3: Arte Moderna (Séculos XIX-XX)</h2>
+                <span class="badge">Cai no ENEM</span>
+            </div>
+            <div class="topicos-grid">
+
+                <!-- Tópico 3.1 -->
+                <div class="topico-card">
+                    <div class="topico-header">
+                        <div class="topico-icon">⚡</div>
+                        <div class="topico-titulo">
+                            <h3>Neoclassicismo e Romantismo</h3>
+                            <span class="frequencia media">Média frequência</span>
+                        </div>
+                    </div>
+                    <ul class="subtopicos">
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Neoclassicismo: razão, equilíbrio, temas clássicos</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Jacques-Louis David: A Morte de Marat</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Romantismo: emoção, natureza, individualismo</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Delacroix: A Liberdade Guiando o Povo</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Goya: Os Fuzilamentos de 3 de Maio</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Missão Artística Francesa no Brasil</li>
+                    </ul>
+                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                </div>
+
+                <!-- Tópico 3.2 -->
+                <div class="topico-card">
+                    <div class="topico-header">
+                        <div class="topico-icon">👨‍🌾</div>
+                        <div class="topico-titulo">
+                            <h3>Realismo</h3>
+                            <span class="frequencia media">Média frequência</span>
+                        </div>
+                    </div>
+                    <ul class="subtopicos">
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Retrato da vida cotidiana e classes trabalhadoras</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Gustave Courbet: Os Quebradores de Pedra</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Jean-François Millet: As Respigadoras</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Crítica social e política na arte</li>
+                    </ul>
+                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                </div>
+
+                <!-- Tópico 3.3 -->
+                <div class="topico-card">
+                    <div class="topico-header">
+                        <div class="topico-icon">🌅</div>
+                        <div class="topico-titulo">
+                            <h3>Impressionismo e Pós-Impressionismo</h3>
+                            <span class="frequencia alta">Alta frequência</span>
+                        </div>
+                    </div>
+                    <ul class="subtopicos">
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Luz, cor e pinceladas soltas</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Monet: Impressão, Nascer do Sol</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Renoir, Degas, Manet</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Pós-Impressionismo: Van Gogh, Cézanne, Gauguin</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Pontilhismo: Seurat</li>
+                    </ul>
+                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                </div>
+
+                <!-- Tópico 3.4 -->
+                <div class="topico-card">
+                    <div class="topico-header">
+                        <div class="topico-icon">🎯</div>
+                        <div class="topico-titulo">
+                            <h3>Vanguardas Europeias</h3>
+                            <span class="frequencia alta">Alta frequência</span>
+                        </div>
+                    </div>
+                    <ul class="subtopicos">
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Cubismo: Picasso (Les Demoiselles d'Avignon) e Braque</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Futurismo: Marinetti, movimento e velocidade</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Expressionismo: Munch (O Grito), cores intensas</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Dadaísmo: Duchamp (A Fonte), ready-made</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Surrealismo: Dalí, Magritte, sonhos e inconsciente</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Abstracionismo: Kandinsky, Mondrian</li>
+                    </ul>
+                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ==================== MÓDULO 4 ==================== -->
+        <div class="section" id="modulo4">
+            <div class="section-header">
+                <i class="fas fa-flag"></i>
+                <h2>Módulo 4: Arte Brasileira</h2>
+                <span class="badge">Cai no ENEM</span>
+            </div>
+            <div class="topicos-grid">
+
+                <!-- Tópico 4.1 -->
+                <div class="topico-card">
+                    <div class="topico-header">
+                        <div class="topico-icon">🌿</div>
+                        <div class="topico-titulo">
+                            <h3>Arte Indígena e Colonial</h3>
+                            <span class="frequencia media">Média frequência</span>
+                        </div>
+                    </div>
+                    <ul class="subtopicos">
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Arte indígena: cerâmica, plumagem, pintura corporal</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Arte colonial: igrejas, talha dourada</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Barroco mineiro: Aleijadinho</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Mestre Ataíde e a pintura de forros</li>
+                    </ul>
+                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                </div>
+
+                <!-- Tópico 4.2 -->
+                <div class="topico-card">
+                    <div class="topico-header">
+                        <div class="topico-icon">🎉</div>
+                        <div class="topico-titulo">
+                            <h3>Semana de Arte Moderna de 1922</h3>
+                            <span class="frequencia alta">Alta frequência</span>
+                        </div>
+                    </div>
+                    <ul class="subtopicos">
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Contexto histórico e ruptura com o academicismo</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Tarsila do Amaral: Abaporu, Antropofagia</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Anita Malfatti: exposição de 1917</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Di Cavalcanti, Victor Brecheret, Villa-Lobos</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Movimento Antropofágico e Pau-Brasil</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Mário e Oswald de Andrade</li>
+                    </ul>
+                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                </div>
+
+                <!-- Tópico 4.3 -->
+                <div class="topico-card">
+                    <div class="topico-header">
+                        <div class="topico-icon">🏙️</div>
+                        <div class="topico-titulo">
+                            <h3>Modernismo e Arte Contemporânea no Brasil</h3>
+                            <span class="frequencia alta">Alta frequência</span>
+                        </div>
+                    </div>
+                    <ul class="subtopicos">
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Candido Portinari: Café, Retirantes</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Concretismo e Neoconcretismo</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Hélio Oiticica: Parangolés</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Lygia Clark: Bichos, arte sensorial</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Arte contemporânea: instalações, performances</li>
+                    </ul>
+                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                </div>
+
+                <!-- Tópico 4.4 -->
+                <div class="topico-card">
+                    <div class="topico-header">
+                        <div class="topico-icon">🎭</div>
+                        <div class="topico-titulo">
+                            <h3>Cultura Popular e Patrimônio</h3>
+                            <span class="frequencia media">Média frequência</span>
+                        </div>
+                    </div>
+                    <ul class="subtopicos">
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Folclore brasileiro e festas populares</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Artesanato e arte popular</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> Patrimônio material e imaterial</li>
+                        <li class="subtopico-item"><i class="fas fa-circle"></i> IPHAN e tombamento</li>
+                    </ul>
+                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                </div>
+
             </div>
         </div>
 
