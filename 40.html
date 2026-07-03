@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudo+ | IA de Ajuda</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #0b0c17;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent-purple: #8b5cf6;
+            --accent-gold: #f59e0b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --radius-xl: 24px;
+            --radius-lg: 18px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: radial-gradient(ellipse at top, #1a1f3a, #0b0c17 70%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 1rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 3rem);
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #c084fc, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .logo i {
+            background: none;
+            -webkit-text-fill-color: #c084fc;
+            font-size: 2rem;
+        }
+
+        .voltar {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .voltar:hover {
+            color: #fff;
+        }
+
+        /* Card principal do chat */
+        .chat-container {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            min-height: 500px;
+        }
+
+        /* Cabeçalho do chat */
+        .chat-header {
+            background: rgba(139, 92, 246, 0.15);
+            padding: 1.2rem 1.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-shrink: 0;
+        }
+
+        .ai-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #8b5cf6, #f59e0b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            animation: pulse 2s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.5); }
+            50% { box-shadow: 0 0 0 15px rgba(139, 92, 246, 0); }
+        }
+
+        .chat-header-info h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .chat-header-info p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .online-dot {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        /* Área de mensagens */
+        .messages-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            scroll-behavior: smooth;
+        }
+
+        .messages-area::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .messages-area::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .messages-area::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+        }
+
+        /* Mensagem */
+        .message {
+            display: flex;
+            gap: 0.8rem;
+            animation: messageSlide 0.4s ease;
+        }
+
+        @keyframes messageSlide {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+
+        .message.ai .message-avatar {
+            background: linear-gradient(135deg, #8b5cf6, #f59e0b);
+            color: #fff;
+        }
+
+        .message.user .message-avatar {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .message-bubble {
+            max-width: 75%;
+            padding: 1rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            word-wrap: break-word;
+        }
+
+        .message.ai .message-bubble {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom-left-radius: 6px;
+        }
+
+        .message.user .message-bubble {
+            background: rgba(139, 92, 246, 0.3);
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            border-bottom-right-radius: 6px;
+        }
+
+        .message-time {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-top: 0.3rem;
+            display: block;
+        }
+
+        /* Formatação de código e texto da IA */
+        .message-bubble pre {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.8rem;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 0.5rem 0;
+            font-size: 0.85rem;
+        }
+
+        .message-bubble code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .message-bubble ul, .message-bubble ol {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .message-bubble li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* Digitando... */
+        .typing-indicator {
+            display: flex;
+            gap: 0.8rem;
+            padding: 0 0.5rem;
+        }
+
+        .typing-bubble {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            border-bottom-left-radius: 6px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            animation: typingDot 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typingDot {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+            30% { transform: translateY(-6px); opacity: 1; }
+        }
+
+        /* Sugestões rápidas */
+        .suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            padding: 0.5rem 1.5rem 1rem;
+            flex-shrink: 0;
+        }
+
+        .suggestion-chip {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .suggestion-chip:hover {
+            background: rgba(139, 92, 246, 0.2);
+            border-color: rgba(139, 92, 246, 0.4);
+            color: #fff;
+        }
+
+        /* Área de input */
+        .chat-input-area {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .chat-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 30px;
+            padding: 0.9rem 1.5rem;
+            color: #fff;
+            font-size: 0.95rem;
+            font-family: inherit;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .chat-input::placeholder {
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .chat-input:focus {
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
+        }
+
+        .btn-send {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #8b5cf6, #f59e0b);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .btn-send:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-send:active {
+            transform: scale(0.95);
+        }
+
+        .btn-send:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: #64748b;
+            font-size: 0.8rem;
+            padding: 1rem 0 0;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 600px) {
+            .message-bubble {
+                max-width: 85%;
+                font-size: 0.9rem;
+            }
+            .chat-input-area {
+                padding: 0.8rem 1rem;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <a href="10.html" class="logo">
+                <i class="fas fa-brain"></i> Estudo+
+            </a>
+            <a href="10.html" class="voltar">
+                <i class="fas fa-arrow-left"></i> Voltar ao início
+            </a>
+        </header>
+
+        <!-- Chat Container -->
+        <div class="chat-container">
+            <!-- Cabeçalho do chat -->
+            <div class="chat-header">
+                <div class="ai-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="chat-header-info">
+                    <h3>IA Estudo+ (Gemini)</h3>
+                    <p><span class="online-dot"></span> Online • Respondendo em tempo real</p>
+                </div>
+            </div>
+
+            <!-- Área de mensagens -->
+            <div class="messages-area" id="messagesArea">
+                <!-- Mensagem inicial da IA -->
+                <div class="message ai">
+                    <div class="message-avatar"><i class="fas fa-robot"></i></div>
+                    <div>
+                        <div class="message-bubble">
+                            Olá! 👋 Eu sou a <strong>IA do Estudo+</strong>, assistente com inteligência real do Google Gemini.<br><br>
+                            Posso te ajudar com:<br>
+                            📚 <strong>Qualquer conteúdo do ENEM</strong><br>
+                            ✍️ <strong>Redação e argumentação</strong><br>
+                            🧮 <strong>Resolução de questões</strong><br>
+                            📝 <strong>Revisão de matérias</strong><br>
+                            🌍 <strong>História, geografia, biologia e mais</strong><br><br>
+                            <strong>Pergunte qualquer coisa!</strong> Estou aqui para ajudar. 😊
+                            <span class="message-time">Agora</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sugestões rápidas -->
+            <div class="suggestions" id="suggestions">
+                <span class="suggestion-chip" onclick="sendSuggestion('Explique a diferença entre mitose e meiose')">🧬 Mitose vs Meiose</span>
+                <span class="suggestion-chip" onclick="sendSuggestion('Como calcular juros compostos?')">💰 Juros Compostos</span>
+                <span class="suggestion-chip" onclick="sendSuggestion('Quais foram as causas da Segunda Guerra Mundial?')">🌍 2ª Guerra</span>
+                <span class="suggestion-chip" onclick="sendSuggestion('Me dê 5 dicas para a redação do ENEM')">✍️ Redação</span>
+                <span class="suggestion-chip" onclick="sendSuggestion('Explique o efeito estufa e aquecimento global')">🌡️ Efeito Estufa</span>
+                <span class="suggestion-chip" onclick="sendSuggestion('Resolva: Uma bola é lançada verticalmente com velocidade de 20 m/s. Qual a altura máxima?')">🔵 Física</span>
+            </div>
+
+            <!-- Input -->
+            <div class="chat-input-area">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Digite sua dúvida sobre o ENEM..." onkeypress="handleKeyPress(event)">
+                <button class="btn-send" id="btnSend" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2026 Estudo+ | IA powered by Google Gemini</p>
+        </footer>
+    </div>
+
+    <script>
+        // ⚠️ SUBSTITUA PELA SUA CHAVE DA API GEMINI
+        const API_KEY = 'SUA_CHAVE_AQUI';
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+
+        const messagesArea = document.getElementById('messagesArea');
+        const chatInput = document.getElementById('chatInput');
+        const btnSend = document.getElementById('btnSend');
+        const suggestionsDiv = document.getElementById('suggestions');
+
+        // Histórico da conversa (contexto para a IA)
+        let conversationHistory = [];
+
+        // Função para rolar para o final
+        function scrollToBottom() {
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+        }
+
+        // Adicionar mensagem do usuário
+        function addUserMessage(text) {
+            const now = new Date();
+            const time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message user';
+            messageDiv.innerHTML = `
+                <div class="message-avatar"><i class="fas fa-user"></i></div>
+                <div>
+                    <div class="message-bubble">
+                        ${escapeHtml(text)}
+                        <span class="message-time">${time}</span>
+                    </div>
+                </div>
+            `;
+            messagesArea.appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        // Adicionar mensagem da IA
+        function addAIMessage(text) {
+            const now = new Date();
+            const time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+            
+            // Formatar o texto (markdown simples para HTML)
+            const formattedText = formatMarkdown(text);
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message ai';
+            messageDiv.innerHTML = `
+                <div class="message-avatar"><i class="fas fa-robot"></i></div>
+                <div>
+                    <div class="message-bubble">
+                        ${formattedText}
+                        <span class="message-time">${time}</span>
+                    </div>
+                </div>
+            `;
+            messagesArea.appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        // Mostrar indicador de "digitando..."
+        function showTyping() {
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'typing-indicator';
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = `
+                <div class="message-avatar" style="background: linear-gradient(135deg, #8b5cf6, #f59e0b); color: #fff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <i class="fas fa-robot" style="font-size: 0.9rem;"></i>
+                </div>
+                <div class="typing-bubble">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            `;
+            messagesArea.appendChild(typingDiv);
+            scrollToBottom();
+        }
+
+        // Remover indicador de "digitando..."
+        function hideTyping() {
+            const typingIndicator = document.getElementById('typingIndicator');
+            if (typingIndicator) typingIndicator.remove();
+        }
+
+        // Escapar HTML para segurança
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Formatar markdown simples para HTML
+        function formatMarkdown(text) {
+            // Código com ```
+            text = text.replace(/```(\w*)\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
+            // Código inline com `
+            text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+            // Negrito com **
+            text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            // Itálico com *
+            text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            // Listas com -
+            text = text.replace(/^- (.+)$/gm, '<li>$1</li>');
+            text = text.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+            // Quebras de linha
+            text = text.replace(/\n/g, '<br>');
+            
+            return text;
+        }
+
+        // Chamar API do Gemini
+        async function callGeminiAPI(userMessage) {
+            // Instruções para a IA se comportar como tutor do ENEM
+            const systemInstruction = {
+                role: "user",
+                parts: [{ text: "Você é um tutor especializado no ENEM. Responda de forma clara, didática e objetiva. Use exemplos quando possível. Mantenha o foco em ajudar o estudante a entender o conteúdo. Se for uma pergunta de cálculo, mostre o passo a passo. Use português do Brasil." }]
+            };
+
+            // Construir o conteúdo da requisição com histórico
+            const contents = [
+                systemInstruction,
+                ...conversationHistory.slice(-10), // Últimas 10 mensagens para contexto
+                {
+                    role: "user",
+                    parts: [{ text: userMessage }]
+                }
+            ];
+
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    contents: contents,
+                    generationConfig: {
+                        temperature: 0.7,
+                        maxOutputTokens: 800,
+                    }
+                })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error?.message || 'Erro na API');
+            }
+
+            const data = await response.json();
+            const aiText = data.candidates[0].content.parts[0].text;
+
+            // Atualizar histórico
+            conversationHistory.push(
+                { role: "user", parts: [{ text: userMessage }] },
+                { role: "model", parts: [{ text: aiText }] }
+            );
+
+            // Limitar histórico a 20 mensagens
+            if (conversationHistory.length > 20) {
+                conversationHistory = conversationHistory.slice(-20);
+            }
+
+            return aiText;
+        }
+
+        // Enviar mensagem
+        async function sendMessage(text) {
+            const messageText = text || chatInput.value.trim();
+            if (!messageText) return;
+            
+            // Desabilitar input durante o envio
+            if (!text) chatInput.value = '';
+            btnSend.disabled = true;
+            chatInput.disabled = true;
+            
+            // Esconder sugestões após primeira mensagem
+            if (suggestionsDiv) {
+                suggestionsDiv.style.display = 'none';
+            }
+            
+            // Adicionar mensagem do usuário
+            addUserMessage(messageText);
+            
+            // Mostrar "digitando..."
+            showTyping();
+            
+            try {
+                // Chamar API real do Gemini
+                const response = await callGeminiAPI(messageText);
+                
+                // Remover "digitando..."
+                hideTyping();
+                
+                // Adicionar resposta da IA
+                addAIMessage(response);
+            } catch (error) {
+                hideTyping();
+                
+                // Mensagem de erro amigável
+                let errorMessage = '❌ <strong>Ops! Algo deu errado.</strong><br><br>';
+                
+                if (error.message.includes('API key')) {
+                    errorMessage += '🔑 <strong>Chave de API inválida.</strong><br>Verifique se você substituiu <code>SUA_CHAVE_AQUI</code> pela sua chave real do Google Gemini.<br><br>👉 Acesse <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: #f59e0b;">Google AI Studio</a> para obter sua chave gratuita.';
+                } else if (error.message.includes('quota')) {
+                    errorMessage += '⏳ Cota da API excedida. Tente novamente em alguns instantes.';
+                } else {
+                    errorMessage += 'Erro ao conectar com a IA: ' + error.message;
+                }
+                
+                addAIMessage(errorMessage);
+            } finally {
+                // Reabilitar input
+                btnSend.disabled = false;
+                chatInput.disabled = false;
+                chatInput.focus();
+            }
+        }
+
+        // Enviar sugestão
+        function sendSuggestion(text) {
+            chatInput.value = text;
+            sendMessage(text);
+        }
+
+        // Enter para enviar
+        function handleKeyPress(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+
+        // Foco no input ao carregar
+        window.onload = () => {
+            scrollToBottom();
+            chatInput.focus();
+        };
+    </script>
+</body>
+</html>
