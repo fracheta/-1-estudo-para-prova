@@ -34,11 +34,28 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Efeito sutil de textura de papel no fundo */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.01) 2px, rgba(255,255,255,0.01) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.01) 2px, rgba(255,255,255,0.01) 4px);
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
             width: 100%;
             max-width: 1100px;
+            position: relative;
+            z-index: 1;
         }
 
         /* Header */
@@ -98,110 +115,219 @@
             color: var(--accent-purple);
         }
 
-        /* Grid de áreas */
-        .areas-container {
+        /* Prateleiras (áreas) */
+        .bookshelf {
             display: flex;
             flex-direction: column;
-            gap: 2.5rem;
+            gap: 3rem;
         }
 
-        .area-section {
-            background: rgba(255, 255, 255, 0.025);
+        .shelf {
+            background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: var(--radius-xl);
-            padding: 1.8rem 2rem;
-            transition: var(--transition);
+            padding: 2rem 2rem 1.5rem;
+            position: relative;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
         }
 
-        .area-section:hover {
-            border-color: rgba(139, 92, 246, 0.25);
+        /* Prateleira de madeira (efeito decorativo) */
+        .shelf::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background: linear-gradient(180deg, rgba(139, 92, 246, 0.3), rgba(0,0,0,0.5));
+            border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
 
-        .area-header {
+        .shelf-title {
             display: flex;
             align-items: center;
             gap: 0.8rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dashed rgba(255,255,255,0.1);
         }
 
-        .area-header i {
+        .shelf-title i {
             font-size: 2rem;
             color: var(--accent-purple);
         }
 
-        .area-header h2 {
-            font-size: 1.5rem;
+        .shelf-title h2 {
+            font-size: 1.4rem;
             font-weight: 700;
         }
 
-        /* Grid de matérias (cards) */
-        .materias-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1.2rem;
+        /* Livros na prateleira */
+        .books-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: flex-start;
+            padding-bottom: 0.5rem;
         }
 
-        .materia-link {
+        /* Estilo de livro */
+        .book-link {
             text-decoration: none;
             color: inherit;
+            perspective: 800px;
+            width: 130px;
         }
 
-        .materia-card {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem 1.2rem;
-            text-align: center;
-            transition: var(--transition);
+        .book {
+            width: 130px;
+            height: 180px;
+            position: relative;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            transform-style: preserve-3d;
             cursor: pointer;
+        }
+
+        .book:hover {
+            transform: translateY(-10px) rotateY(-5deg);
+            box-shadow: -10px 15px 25px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Lombada do livro */
+        .book-spine {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2d1f4e, #4c3a6b);
+            border-radius: 5px 10px 10px 5px;
+            box-shadow: 2px 5px 15px rgba(0,0,0,0.6);
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
-            gap: 0.8rem;
-            height: 100%;
+            padding: 1rem;
+            text-align: center;
+            border-left: 6px solid var(--accent-gold);
+            transform-origin: left center;
+            transition: background 0.3s;
         }
 
-        .materia-card:hover {
-            background: rgba(139, 92, 246, 0.12);
-            border-color: rgba(139, 92, 246, 0.4);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+        .book:hover .book-spine {
+            background: linear-gradient(135deg, #3d2b5a, #5e4a7c);
         }
 
-        .materia-card i {
-            font-size: 2.2rem;
+        .book-spine i {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
             background: linear-gradient(135deg, #c084fc, #f59e0b);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .materia-card h3 {
-            font-size: 1.05rem;
+        .book-spine h3 {
+            font-size: 0.9rem;
             font-weight: 600;
-            color: var(--text-primary);
+            color: #fff;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            letter-spacing: 1px;
+            white-space: nowrap;
         }
 
-        .materia-card small {
-            color: var(--text-secondary);
-            font-size: 0.8rem;
+        .book-spine .tag {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.5);
+            color: var(--accent-gold);
+            font-size: 0.6rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+            writing-mode: horizontal-tb;
+            letter-spacing: 0.5px;
         }
 
-        /* Footer */
-        .footer {
+        /* Capa (frente) que aparece ao girar */
+        .book-cover {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #1a1f3a, #252b45);
+            border-radius: 5px 10px 10px 5px;
+            box-shadow: 2px 5px 15px rgba(0,0,0,0.6);
+            transform: rotateY(90deg);
+            transform-origin: left center;
+            transition: transform 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
             text-align: center;
-            color: var(--text-secondary);
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            backface-visibility: hidden;
         }
 
-        @media (max-width: 600px) {
-            .materias-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        .book:hover .book-cover {
+            transform: rotateY(0deg);
+        }
+
+        .book-cover i {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.8rem;
+        }
+
+        .book-cover h4 {
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 0.3rem;
+        }
+
+        .book-cover small {
+            color: #94a3b8;
+            font-size: 0.7rem;
+        }
+
+        /* Ajuste para mobile */
+        @media (max-width: 700px) {
+            .book-link {
+                width: 100px;
+            }
+            .book {
+                width: 100px;
+                height: 150px;
+            }
+            .book-spine i {
+                font-size: 1.5rem;
+            }
+            .book-spine h3 {
+                font-size: 0.7rem;
+            }
+            .book-cover i {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .books-row {
+                justify-content: center;
+                gap: 1rem;
+            }
+            .book-link {
+                width: 80px;
+            }
+            .book {
+                width: 80px;
+                height: 130px;
             }
         }
     </style>
@@ -223,148 +349,253 @@
             <i class="fas fa-book-open"></i> Material Didático
         </h1>
 
-        <!-- Áreas e matérias -->
-        <div class="areas-container">
-            <!-- Linguagens, Códigos e suas Tecnologias -->
-            <div class="area-section">
-                <div class="area-header">
+        <!-- Prateleiras de livros -->
+        <div class="bookshelf">
+            <!-- Linguagens -->
+            <div class="shelf">
+                <div class="shelf-title">
                     <i class="fas fa-language"></i>
                     <h2>Linguagens, Códigos e suas Tecnologias</h2>
                 </div>
-                <div class="materias-grid">
-                    <a href="material-arte.html" class="materia-link">
-                        <div class="materia-card">
-                            <i class="fas fa-paint-brush"></i>
-                            <h3>Arte</h3>
-                            <small>Apostilas, resumos e mapas mentais</small>
+                <div class="books-row">
+                    <a href="material-arte.html" class="book-link">
+                        <div class="book">
+                            <div class="book-spine">
+                                <i class="fas fa-paint-brush"></i>
+                                <h3>Arte</h3>
+                                <span class="tag">PDF</span>
+                            </div>
+                            <div class="book-cover">
+                                <i class="fas fa-paint-brush"></i>
+                                <h4>Arte</h4>
+                                <small>Apostilas e resumos</small>
+                            </div>
                         </div>
                     </a>
-                    <a href="material-educacao-fisica.html" class="materia-link">
-                        <div class="materia-card">
-                            <i class="fas fa-running"></i>
-                            <h3>Educação Física</h3>
-                            <small>Resumos e esquemas visuais</small>
+                    <a href="material-educacao-fisica.html" class="book-link">
+                        <div class="book">
+                            <div class="book-spine">
+                                <i class="fas fa-running"></i>
+                                <h3>Educ. Física</h3>
+                                <span class="tag">PDF</span>
+                            </div>
+                            <div class="book-cover">
+                                <i class="fas fa-running"></i>
+                                <h4>Educação Física</h4>
+                                <small>Esquemas visuais</small>
+                            </div>
                         </div>
                     </a>
-                    <a href="material-espanhol.html" class="materia-link">
-                        <div class="materia-card">
-                            <i class="fas fa-globe"></i>
-                            <h3>Língua Espanhola</h3>
-                            <small>Gramática e vocabulário em PDF</small>
+                    <a href="material-espanhol.html" class="book-link">
+                        <div class="book">
+                            <div class="book-spine">
+                                <i class="fas fa-globe"></i>
+                                <h3>Espanhol</h3>
+                                <span class="tag">PDF</span>
+                            </div>
+                            <div class="book-cover">
+                                <i class="fas fa-globe"></i>
+                                <h4>Língua Espanhola</h4>
+                                <small>Gramática e vocabulário</small>
+                            </div>
                         </div>
                     </a>
-                    <a href="material-ingles.html" class="materia-link">
-                        <div class="materia-card">
-                            <i class="fas fa-flag-usa"></i>
-                            <h3>Língua Inglesa</h3>
-                            <small>Textos, exercícios e guias</small>
+                    <a href="material-ingles.html" class="book-link">
+                        <div class="book">
+                            <div class="book-spine">
+                                <i class="fas fa-flag-usa"></i>
+                                <h3>Inglês</h3>
+                                <span class="tag">PDF</span>
+                            </div>
+                            <div class="book-cover">
+                                <i class="fas fa-flag-usa"></i>
+                                <h4>Língua Inglesa</h4>
+                                <small>Textos e exercícios</small>
+                            </div>
                         </div>
                     </a>
-                    <a href="material-portugues.html" class="materia-link">
-                        <div class="materia-card">
-                            <i class="fas fa-comment-alt"></i>
-                            <h3>Língua Portuguesa</h3>
-                            <small>Gramática, redação e literatura</small>
+                    <a href="material-portugues.html" class="book-link">
+                        <div class="book">
+                            <div class="book-spine">
+                                <i class="fas fa-comment-alt"></i>
+                                <h3>Português</h3>
+                                <span class="tag">PDF</span>
+                            </div>
+                            <div class="book-cover">
+                                <i class="fas fa-comment-alt"></i>
+                                <h4>Língua Portuguesa</h4>
+                                <small>Gramática e redação</small>
+                            </div>
                         </div>
                     </a>
-                    <a href="material-literatura.html" class="materia-link">
-                        <div class="materia-card">
-                            <i class="fas fa-book"></i>
-                            <h3>Literatura</h3>
-                            <small>Análises de obras e escolas literárias</small>
+                    <a href="material-literatura.html" class="book-link">
+                        <div class="book">
+                            <div class="book-spine">
+                                <i class="fas fa-book"></i>
+                                <h3>Literatura</h3>
+                                <span class="tag">PDF</span>
+                            </div>
+                            <div class="book-cover">
+                                <i class="fas fa-book"></i>
+                                <h4>Literatura</h4>
+                                <small>Análises de obras</small>
+                            </div>
                         </div>
                     </a>
-                    <a href="material-redacao.html" class="materia-link">
-                        <div class="materia-card">
-                            <i class="fas fa-pen"></i>
-                            <h3>Redação</h3>
-                            <small>Modelos, temas e dicas práticas</small>
+                    <a href="material-redacao.html" class="book-link">
+                        <div class="book">
+                            <div class="book-spine">
+                                <i class="fas fa-pen"></i>
+                                <h3>Redação</h3>
+                                <span class="tag">PDF</span>
+                            </div>
+                            <div class="book-cover">
+                                <i class="fas fa-pen"></i>
+                                <h4>Redação</h4>
+                                <small>Modelos e dicas</small>
+                            </div>
                         </div>
                     </a>
                 </div>
             </div>
 
-            <!-- Ciências da Natureza e suas Tecnologias -->
-            <div class="area-section">
-                <div class="area-header">
+            <!-- Ciências da Natureza -->
+            <div class="shelf">
+                <div class="shelf-title">
                     <i class="fas fa-leaf"></i>
                     <h2>Ciências da Natureza e suas Tecnologias</h2>
                 </div>
-                <div class="materias-grid">
-                    <a href="material-biologia.html" class="materia-link">
-                        <div class="materia-card">
-                            <i class="fas fa-dna"></i>
-                            <h3>Biologia</h3>
-                            <small>Resumos ilustrados e esquemas</small>
+                <div class="books-row">
+                    <a href="material-biologia.html" class="book-link">
+                        <div class="book">
+                            <div class="book-spine">
+                                <i class="fas fa-dna"></i>
+                                <h3>Biologia</h3>
+                                <span class="tag">PDF</span>
+                            </div>
+                            <div class="book-cover">
+                                <i class="fas fa-dna"></i>
+                                <h4>Biologia</h4>
+                                <small>Resumos ilustrados</small>
+                            </div>
                         </div>
                     </a>
-                    <a href="material-fisica.html" class="materia-link">
-                        <div class="materia-card">
-                            <i class="fas fa-atom"></i>
-                            <h3>Física</h3>
-                            <small>Fórmulas e explicações detalhadas</small>
+                    <a href="material-fisica.html" class="book-link">
+                        <div class="book">
+                            <div class="book-spine">
+                                <i class="fas fa-atom"></i>
+                                <h3>Física</h3>
+                                <span class="tag">PDF</span>
+                            </div>
+                            <div class="book-cover">
+                                <i class="fas fa-atom"></i>
+                                <h4>Física</h4>
+                                <small>Fórmulas e explicações</small>
+                            </div>
                         </div>
                     </a>
-                    <a href="material-quimica.html" class="materia-link">
-                        <div class="materia-card">
-                            <i class="fas fa-flask"></i>
-                            <h3>Química</h3>
-                            <small>Tabelas, reações e orgânica</small>
+                    <a href="material-quimica.html" class="book-link">
+                        <div class="book">
+                            <div class="book-spine">
+                                <i class="fas fa-flask"></i>
+                                <h3>Química</h3>
+                                <span class="tag">PDF</span>
+                            </div>
+                            <div class="book-cover">
+                                <i class="fas fa-flask"></i>
+                                <h4>Química</h4>
+                                <small>Tabelas e reações</small>
+                            </div>
                         </div>
                     </a>
                 </div>
             </div>
 
-            <!-- Ciências Humanas e suas Tecnologias -->
-            <div class="area-section">
-                <div class="area-header">
+            <!-- Ciências Humanas -->
+            <div class="shelf">
+                <div class="shelf-title">
                     <i class="fas fa-globe-americas"></i>
                     <h2>Ciências Humanas e suas Tecnologias</h2>
                 </div>
-                <div class="materias-grid">
-                    <a href="material-filosofia.html" class="materia-link">
-                        <div class="materia-card">
-                            <i class="fas fa-brain"></i>
-                            <h3>Filosofia</h3>
-                            <small>Mapas mentais e resumos filosóficos</small>
+                <div class="books-row">
+                    <a href="material-filosofia.html" class="book-link">
+                        <div class="book">
+                            <div class="book-spine">
+                                <i class="fas fa-brain"></i>
+                                <h3>Filosofia</h3>
+                                <span class="tag">PDF</span>
+                            </div>
+                            <div class="book-cover">
+                                <i class="fas fa-brain"></i>
+                                <h4>Filosofia</h4>
+                                <small>Mapas mentais</small>
+                            </div>
                         </div>
                     </a>
-                    <a href="material-geografia.html" class="materia-link">
-                        <div class="materia-card">
-                            <i class="fas fa-mountain"></i>
-                            <h3>Geografia</h3>
-                            <small>Infográficos e análises geopolíticas</small>
+                    <a href="material-geografia.html" class="book-link">
+                        <div class="book">
+                            <div class="book-spine">
+                                <i class="fas fa-mountain"></i>
+                                <h3>Geografia</h3>
+                                <span class="tag">PDF</span>
+                            </div>
+                            <div class="book-cover">
+                                <i class="fas fa-mountain"></i>
+                                <h4>Geografia</h4>
+                                <small>Infográficos</small>
+                            </div>
                         </div>
                     </a>
-                    <a href="material-historia.html" class="materia-link">
-                        <div class="materia-card">
-                            <i class="fas fa-landmark"></i>
-                            <h3>História</h3>
-                            <small>Linhas do tempo e documentos</small>
+                    <a href="material-historia.html" class="book-link">
+                        <div class="book">
+                            <div class="book-spine">
+                                <i class="fas fa-landmark"></i>
+                                <h3>História</h3>
+                                <span class="tag">PDF</span>
+                            </div>
+                            <div class="book-cover">
+                                <i class="fas fa-landmark"></i>
+                                <h4>História</h4>
+                                <small>Linhas do tempo</small>
+                            </div>
                         </div>
                     </a>
-                    <a href="material-sociologia.html" class="materia-link">
-                        <div class="materia-card">
-                            <i class="fas fa-users"></i>
-                            <h3>Sociologia</h3>
-                            <small>Textos clássicos e contemporâneos</small>
+                    <a href="material-sociologia.html" class="book-link">
+                        <div class="book">
+                            <div class="book-spine">
+                                <i class="fas fa-users"></i>
+                                <h3>Sociologia</h3>
+                                <span class="tag">PDF</span>
+                            </div>
+                            <div class="book-cover">
+                                <i class="fas fa-users"></i>
+                                <h4>Sociologia</h4>
+                                <small>Textos clássicos</small>
+                            </div>
                         </div>
                     </a>
                 </div>
             </div>
 
-            <!-- Matemática e suas Tecnologias -->
-            <div class="area-section">
-                <div class="area-header">
+            <!-- Matemática -->
+            <div class="shelf">
+                <div class="shelf-title">
                     <i class="fas fa-calculator"></i>
                     <h2>Matemática e suas Tecnologias</h2>
                 </div>
-                <div class="materias-grid">
-                    <a href="material-matematica.html" class="materia-link">
-                        <div class="materia-card">
-                            <i class="fas fa-square-root-alt"></i>
-                            <h3>Matemática</h3>
-                            <small>Fórmulas, exercícios resolvidos</small>
+                <div class="books-row">
+                    <a href="material-matematica.html" class="book-link">
+                        <div class="book">
+                            <div class="book-spine">
+                                <i class="fas fa-square-root-alt"></i>
+                                <h3>Matemática</h3>
+                                <span class="tag">PDF</span>
+                            </div>
+                            <div class="book-cover">
+                                <i class="fas fa-square-root-alt"></i>
+                                <h4>Matemática</h4>
+                                <small>Fórmulas e exercícios</small>
+                            </div>
                         </div>
                     </a>
                 </div>
@@ -372,8 +603,8 @@
         </div>
 
         <!-- Rodapé -->
-        <footer class="footer">
-            <p>© 2026 Estudos+ | Material didático completo para o ENEM</p>
+        <footer class="footer" style="text-align: center; color: #64748b; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05);">
+            <p>© 2026 Estudos+ | Sua biblioteca digital para o ENEM</p>
         </footer>
     </div>
 </body>
