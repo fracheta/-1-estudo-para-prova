@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudos+ | Painel de Estudos</title>
+    <!-- Font Awesome para ícones profissionais -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #0b0c17;
+            --bg-secondary: rgba(20, 20, 40, 0.75);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent-purple: #8b5cf6;
+            --accent-gold: #f59e0b;
+            --accent-coral: #ff6b6b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --shadow-card: 0 20px 40px rgba(0, 0, 0, 0.5);
+            --radius-xl: 28px;
+            --radius-lg: 20px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: radial-gradient(ellipse at top, #1a1f3a, #0b0c17 70%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 1rem 3rem;
+            position: relative;
+        }
+
+        /* Fundo animado com gradiente sutil */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 30% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 60%, rgba(245, 158, 11, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #c084fc, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            background: none;
+            -webkit-text-fill-color: #c084fc;
+        }
+
+        .saudacao {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            border-radius: 50px;
+            padding: 0.6rem 1.5rem;
+            border: 1px solid var(--glass-border);
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .saudacao i {
+            color: var(--accent-gold);
+        }
+
+        /* Seção de boas-vindas com mensagem motivacional */
+        .welcome-banner {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(245, 158, 11, 0.1));
+            border-radius: var(--radius-xl);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            backdrop-filter: blur(16px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            animation: fadeSlideUp 0.8s ease;
+        }
+
+        .welcome-text h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-text p {
+            color: var(--text-secondary);
+            max-width: 450px;
+            line-height: 1.6;
+        }
+
+        .welcome-emoji {
+            font-size: 4rem;
+            opacity: 0.9;
+        }
+
+        /* Grid principal de atalhos (Aulas, Material, IA) */
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 3rem;
+        }
+
+        .card-atalho {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem 1.8rem;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-atalho:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 25px 45px rgba(139, 92, 246, 0.2);
+        }
+
+        .card-atalho i {
+            font-size: 3.2rem;
+            background: linear-gradient(135deg, #c084fc, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.3rem;
+        }
+
+        .card-atalho h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .card-atalho p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--accent-gold);
+        }
+
+        /* Seção de Progresso Rápido */
+        .progress-section {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            padding: 2rem 2.2rem;
+            margin-bottom: 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .circular-progress {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .progress-ring {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+
+        .progress-ring svg {
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring circle {
+            fill: none;
+            stroke-width: 10;
+            stroke-linecap: round;
+        }
+
+        .bg-circle {
+            stroke: rgba(255, 255, 255, 0.08);
+        }
+
+        .progress-circle {
+            stroke: url(#gradientProgress);
+            stroke-dasharray: 251.2; /* 2 * PI * 40 ≈ 251.2 */
+            stroke-dashoffset: 75; /* 70% progresso (251.2 * 0.3 ≈ 75) */
+            transition: stroke-dashoffset 1s ease;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .progress-details h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .progress-details p {
+            color: var(--text-secondary);
+        }
+
+        .streak {
+            margin-left: auto;
+            text-align: center;
+            background: rgba(245, 158, 11, 0.1);
+            border-radius: 50%;
+            width: 90px;
+            height: 90px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid rgba(245, 158, 11, 0.5);
+        }
+
+        .streak i {
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+        }
+
+        .streak span {
+            font-weight: 800;
+            font-size: 1.5rem;
+        }
+
+        /* Matérias - grid de ícones */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .materias-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 3rem;
+        }
+
+        .materia-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 1.8rem 1rem;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .materia-card:hover {
+            background: rgba(139, 92, 246, 0.1);
+            border-color: rgba(139, 92, 246, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .materia-card i {
+            font-size: 2.2rem;
+            color: var(--accent-purple);
+            margin-bottom: 0.8rem;
+        }
+
+        .materia-card h5 {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* Rodapé */
+        .footer {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            padding: 2rem 0 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 2rem;
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .welcome-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+            .progress-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .streak {
+                margin-left: 0;
+                align-self: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-brain"></i> Estudos+
+            </div>
+            <div class="saudacao" id="saudacao">
+                <i class="fas fa-sun"></i> <span id="saudacao-texto">Bom dia</span>, estudante!
+            </div>
+        </header>
+
+        <!-- Banner motivacional -->
+        <div class="welcome-banner">
+            <div class="welcome-text">
+                <h2>Continue sua jornada 🚀</h2>
+                <p>Você está no caminho certo. Faltam <strong id="dias-enem">...</strong> para o ENEM. Mantenha o foco e a constância!</p>
+            </div>
+            <div class="welcome-emoji">📚✨</div>
+        </div>
+
+        <!-- Cards principais de navegação -->
+        <div class="main-grid">
+            <a href="20.html" class="card-atalho">
+                <span class="card-badge">Ao vivo</span>
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h3>Aulas</h3>
+                <p>Aulas dinâmicas com os melhores professores. Aprenda no seu ritmo com vídeos e quizzes.</p>
+            </a>
+
+            <a href="30.html" class="card-atalho">
+                <span class="card-badge">PDFs</span>
+                <i class="fas fa-book-open"></i>
+                <h3>Material Didático</h3>
+                <p>Apostilas completas, resumos e mapas mentais para todos os conteúdos do ENEM.</p>
+            </a>
+
+            <a href="40.html" class="card-atalho">
+                <span class="card-badge">IA</span>
+                <i class="fas fa-robot"></i>
+                <h3>IA de Ajuda</h3>
+                <p>Tire dúvidas instantâneas com nossa inteligência artificial treinada para o ENEM.</p>
+            </a>
+        </div>
+
+        <!-- Seção de Progresso -->
+        <div class="progress-section">
+            <div class="circular-progress">
+                <div class="progress-ring">
+                    <svg width="100" height="100" viewBox="0 0 100 100">
+                        <defs>
+                            <linearGradient id="gradientProgress" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#c084fc" />
+                                <stop offset="100%" stop-color="#f59e0b" />
+                            </linearGradient>
+                        </defs>
+                        <circle class="bg-circle" cx="50" cy="50" r="40" />
+                        <circle class="progress-circle" cx="50" cy="50" r="40" id="progressCircle" />
+                    </svg>
+                    <div class="progress-text">70%</div>
+                </div>
+                <div class="progress-details">
+                    <h4>Conteúdo concluído</h4>
+                    <p>Você já estudou 70% do plano ENEM 2026. Continue assim!</p>
+                </div>
+            </div>
+            <div class="streak">
+                <i class="fas fa-fire"></i>
+                <span>12</span>
+                <small>dias</small>
+            </div>
+        </div>
+
+        <!-- Matérias -->
+        <h3 class="section-title"><i class="fas fa-layer-group"></i> Matérias</h3>
+        <div class="materias-grid">
+            <div class="materia-card">
+                <i class="fas fa-calculator"></i>
+                <h5>Matemática</h5>
+            </div>
+            <div class="materia-card">
+                <i class="fas fa-atom"></i>
+                <h5>Ciências da Natureza</h5>
+            </div>
+            <div class="materia-card">
+                <i class="fas fa-globe-americas"></i>
+                <h5>Ciências Humanas</h5>
+            </div>
+            <div class="materia-card">
+                <i class="fas fa-language"></i>
+                <h5>Linguagens</h5>
+            </div>
+            <div class="materia-card">
+                <i class="fas fa-pen-fancy"></i>
+                <h5>Redação</h5>
+            </div>
+        </div>
+
+        <!-- Rodapé -->
+        <footer class="footer">
+            <p>© 2026 Estudos+ | Preparação inteligente para o ENEM</p>
+        </footer>
+    </div>
+
+    <script>
+        // Saudação conforme horário
+        function atualizarSaudacao() {
+            const hora = new Date().getHours();
+            const elemento = document.getElementById('saudacao-texto');
+            const icone = document.querySelector('#saudacao i');
+            if (hora >= 5 && hora < 12) {
+                elemento.textContent = 'Bom dia';
+                icone.className = 'fas fa-sun';
+            } else if (hora >= 12 && hora < 18) {
+                elemento.textContent = 'Boa tarde';
+                icone.className = 'fas fa-cloud-sun';
+            } else {
+                elemento.textContent = 'Boa noite';
+                icone.className = 'fas fa-moon';
+            }
+        }
+
+        // Contagem de dias para o ENEM (3 de novembro de 2026)
+        function atualizarDiasEnem() {
+            const target = new Date('2026-11-03T09:00:00-03:00').getTime();
+            const agora = new Date().getTime();
+            const diff = target - agora;
+            const dias = Math.ceil(diff / (1000 * 60 * 60 * 24));
+            const span = document.getElementById('dias-enem');
+            if (span) span.textContent = dias > 0 ? `${dias} dias` : 'poucos dias';
+        }
+
+        // Animação da barra de progresso (opcional, define o dashoffset)
+        function setProgress(percent) {
+            const circle = document.getElementById('progressCircle');
+            if (circle) {
+                const radius = 40;
+                const circumference = 2 * Math.PI * radius;
+                const offset = circumference - (percent / 100) * circumference;
+                circle.style.strokeDasharray = circumference;
+                circle.style.strokeDashoffset = offset;
+                document.querySelector('.progress-text').textContent = percent + '%';
+            }
+        }
+
+        // Inicializações
+        atualizarSaudacao();
+        atualizarDiasEnem();
+        setProgress(70); // Define 70% de progresso
+
+        // Atualiza saudação a cada minuto (para trocar entre tarde/noite)
+        setInterval(atualizarSaudacao, 60000);
+    </script>
+</body>
+</html>
