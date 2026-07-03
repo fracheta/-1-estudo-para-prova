@@ -182,6 +182,8 @@
             border-radius: var(--radius-lg);
             padding: 1.5rem;
             transition: var(--transition);
+            display: flex;
+            flex-direction: column;
         }
 
         .topico-card:hover {
@@ -234,6 +236,7 @@
             flex-direction: column;
             gap: 0.3rem;
             margin-bottom: 1rem;
+            flex: 1;
         }
 
         .subtopico-item {
@@ -250,31 +253,31 @@
             color: var(--accent-gold);
         }
 
-        /* Botão de aula */
-        .btn-aula {
+        /* Botão de ir para a área */
+        .btn-area {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             background: linear-gradient(135deg, #8b5cf6, #6d28d9);
             color: #fff;
             text-decoration: none;
-            padding: 0.6rem 1.2rem;
+            padding: 0.7rem 1.2rem;
             border-radius: 25px;
             font-size: 0.85rem;
             font-weight: 600;
             transition: var(--transition);
             width: 100%;
             justify-content: center;
-            margin-top: 0.5rem;
+            margin-top: auto;
         }
 
-        .btn-aula:hover {
+        .btn-area:hover {
             background: linear-gradient(135deg, #9b6cf6, #7d38e9);
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
         }
 
-        .btn-aula i {
+        .btn-area i {
             font-size: 0.9rem;
         }
 
@@ -313,14 +316,14 @@
                 <h1>Arte</h1>
                 <p>Domine todos os conteúdos de Arte que caem no ENEM e vestibulares. Da Pré-História à Arte Contemporânea, com foco nos temas mais cobrados!</p>
                 <div class="materia-stats">
-                    <div class="stat-item"><i class="fas fa-layer-group"></i> <span>6 módulos</span></div>
-                    <div class="stat-item"><i class="fas fa-list-check"></i> <span>24 tópicos</span></div>
+                    <div class="stat-item"><i class="fas fa-layer-group"></i> <span>4 módulos</span></div>
+                    <div class="stat-item"><i class="fas fa-list-check"></i> <span>16 áreas de estudo</span></div>
                     <div class="stat-item"><i class="fas fa-star"></i> <span>Foco ENEM</span></div>
                 </div>
             </div>
         </div>
 
-        <!-- ==================== MÓDULO 1 ==================== -->
+        <!-- ==================== MÓDULO 1: PRÉ-HISTÓRIA E ANTIGUIDADE ==================== -->
         <div class="section" id="modulo1">
             <div class="section-header">
                 <i class="fas fa-archway"></i>
@@ -329,7 +332,7 @@
             </div>
             <div class="topicos-grid">
 
-                <!-- Tópico 1.1 -->
+                <!-- Tópico 1 -->
                 <div class="topico-card">
                     <div class="topico-header">
                         <div class="topico-icon">🦴</div>
@@ -345,11 +348,10 @@
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Stonehenge e menires</li>
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Arte rupestre no Brasil (Serra da Capivara)</li>
                     </ul>
-                    <!-- LINK DA AULA AQUI -->
-                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                    <a href="1arte.html" class="btn-area"><i class="fas fa-arrow-right"></i> Ir para a área</a>
                 </div>
 
-                <!-- Tópico 1.2 -->
+                <!-- Tópico 2 -->
                 <div class="topico-card">
                     <div class="topico-header">
                         <div class="topico-icon">🏺</div>
@@ -365,11 +367,10 @@
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Arquitetura: pirâmides e templos</li>
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Simbologia e religiosidade</li>
                     </ul>
-                    <!-- LINK DA AULA AQUI -->
-                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                    <a href="2arte.html" class="btn-area"><i class="fas fa-arrow-right"></i> Ir para a área</a>
                 </div>
 
-                <!-- Tópico 1.3 -->
+                <!-- Tópico 3 -->
                 <div class="topico-card">
                     <div class="topico-header">
                         <div class="topico-icon">🏛️</div>
@@ -386,11 +387,10 @@
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Teatro grego: tragédia e comédia</li>
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Cerâmica grega (vasos decorados)</li>
                     </ul>
-                    <!-- LINK DA AULA AQUI -->
-                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                    <a href="3arte.html" class="btn-area"><i class="fas fa-arrow-right"></i> Ir para a área</a>
                 </div>
 
-                <!-- Tópico 1.4 -->
+                <!-- Tópico 4 -->
                 <div class="topico-card">
                     <div class="topico-header">
                         <div class="topico-icon">🏗️</div>
@@ -406,14 +406,13 @@
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Coliseu e Panteão</li>
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Mosaicos e afrescos (Pompeia)</li>
                     </ul>
-                    <!-- LINK DA AULA AQUI -->
-                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                    <a href="4arte.html" class="btn-area"><i class="fas fa-arrow-right"></i> Ir para a área</a>
                 </div>
 
             </div>
         </div>
 
-        <!-- ==================== MÓDULO 2 ==================== -->
+        <!-- ==================== MÓDULO 2: ARTE MEDIEVAL E RENASCENTISTA ==================== -->
         <div class="section" id="modulo2">
             <div class="section-header">
                 <i class="fas fa-church"></i>
@@ -422,7 +421,7 @@
             </div>
             <div class="topicos-grid">
 
-                <!-- Tópico 2.1 -->
+                <!-- Tópico 5 -->
                 <div class="topico-card">
                     <div class="topico-header">
                         <div class="topico-icon">⛪</div>
@@ -438,10 +437,10 @@
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Iluminuras e manuscritos</li>
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Notre-Dame e Catedral de Chartres</li>
                     </ul>
-                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                    <a href="5arte.html" class="btn-area"><i class="fas fa-arrow-right"></i> Ir para a área</a>
                 </div>
 
-                <!-- Tópico 2.2 -->
+                <!-- Tópico 6 -->
                 <div class="topico-card">
                     <div class="topico-header">
                         <div class="topico-icon">🎭</div>
@@ -459,10 +458,10 @@
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Botticelli: O Nascimento de Vênus</li>
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Mecenato e famílias poderosas (Medici)</li>
                     </ul>
-                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                    <a href="6arte.html" class="btn-area"><i class="fas fa-arrow-right"></i> Ir para a área</a>
                 </div>
 
-                <!-- Tópico 2.3 -->
+                <!-- Tópico 7 -->
                 <div class="topico-card">
                     <div class="topico-header">
                         <div class="topico-icon">🖌️</div>
@@ -478,10 +477,10 @@
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Velázquez e Rubens</li>
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Barroco no Brasil: Aleijadinho e Mestre Ataíde</li>
                     </ul>
-                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                    <a href="7arte.html" class="btn-area"><i class="fas fa-arrow-right"></i> Ir para a área</a>
                 </div>
 
-                <!-- Tópico 2.4 -->
+                <!-- Tópico 8 -->
                 <div class="topico-card">
                     <div class="topico-header">
                         <div class="topico-icon">🌸</div>
@@ -495,13 +494,13 @@
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Decoração de interiores e ornamentação</li>
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Watteau, Fragonard e Boucher</li>
                     </ul>
-                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                    <a href="8arte.html" class="btn-area"><i class="fas fa-arrow-right"></i> Ir para a área</a>
                 </div>
 
             </div>
         </div>
 
-        <!-- ==================== MÓDULO 3 ==================== -->
+        <!-- ==================== MÓDULO 3: ARTE MODERNA (SÉCULOS XIX-XX) ==================== -->
         <div class="section" id="modulo3">
             <div class="section-header">
                 <i class="fas fa-bolt"></i>
@@ -510,7 +509,7 @@
             </div>
             <div class="topicos-grid">
 
-                <!-- Tópico 3.1 -->
+                <!-- Tópico 9 -->
                 <div class="topico-card">
                     <div class="topico-header">
                         <div class="topico-icon">⚡</div>
@@ -527,10 +526,10 @@
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Goya: Os Fuzilamentos de 3 de Maio</li>
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Missão Artística Francesa no Brasil</li>
                     </ul>
-                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                    <a href="9arte.html" class="btn-area"><i class="fas fa-arrow-right"></i> Ir para a área</a>
                 </div>
 
-                <!-- Tópico 3.2 -->
+                <!-- Tópico 10 -->
                 <div class="topico-card">
                     <div class="topico-header">
                         <div class="topico-icon">👨‍🌾</div>
@@ -545,10 +544,10 @@
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Jean-François Millet: As Respigadoras</li>
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Crítica social e política na arte</li>
                     </ul>
-                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                    <a href="10arte.html" class="btn-area"><i class="fas fa-arrow-right"></i> Ir para a área</a>
                 </div>
 
-                <!-- Tópico 3.3 -->
+                <!-- Tópico 11 -->
                 <div class="topico-card">
                     <div class="topico-header">
                         <div class="topico-icon">🌅</div>
@@ -564,10 +563,10 @@
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Pós-Impressionismo: Van Gogh, Cézanne, Gauguin</li>
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Pontilhismo: Seurat</li>
                     </ul>
-                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                    <a href="11arte.html" class="btn-area"><i class="fas fa-arrow-right"></i> Ir para a área</a>
                 </div>
 
-                <!-- Tópico 3.4 -->
+                <!-- Tópico 12 -->
                 <div class="topico-card">
                     <div class="topico-header">
                         <div class="topico-icon">🎯</div>
@@ -584,13 +583,13 @@
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Surrealismo: Dalí, Magritte, sonhos e inconsciente</li>
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Abstracionismo: Kandinsky, Mondrian</li>
                     </ul>
-                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                    <a href="12arte.html" class="btn-area"><i class="fas fa-arrow-right"></i> Ir para a área</a>
                 </div>
 
             </div>
         </div>
 
-        <!-- ==================== MÓDULO 4 ==================== -->
+        <!-- ==================== MÓDULO 4: ARTE BRASILEIRA ==================== -->
         <div class="section" id="modulo4">
             <div class="section-header">
                 <i class="fas fa-flag"></i>
@@ -599,7 +598,7 @@
             </div>
             <div class="topicos-grid">
 
-                <!-- Tópico 4.1 -->
+                <!-- Tópico 13 -->
                 <div class="topico-card">
                     <div class="topico-header">
                         <div class="topico-icon">🌿</div>
@@ -614,10 +613,10 @@
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Barroco mineiro: Aleijadinho</li>
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Mestre Ataíde e a pintura de forros</li>
                     </ul>
-                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                    <a href="13arte.html" class="btn-area"><i class="fas fa-arrow-right"></i> Ir para a área</a>
                 </div>
 
-                <!-- Tópico 4.2 -->
+                <!-- Tópico 14 -->
                 <div class="topico-card">
                     <div class="topico-header">
                         <div class="topico-icon">🎉</div>
@@ -634,10 +633,10 @@
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Movimento Antropofágico e Pau-Brasil</li>
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Mário e Oswald de Andrade</li>
                     </ul>
-                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                    <a href="14arte.html" class="btn-area"><i class="fas fa-arrow-right"></i> Ir para a área</a>
                 </div>
 
-                <!-- Tópico 4.3 -->
+                <!-- Tópico 15 -->
                 <div class="topico-card">
                     <div class="topico-header">
                         <div class="topico-icon">🏙️</div>
@@ -653,10 +652,10 @@
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Lygia Clark: Bichos, arte sensorial</li>
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Arte contemporânea: instalações, performances</li>
                     </ul>
-                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                    <a href="15arte.html" class="btn-area"><i class="fas fa-arrow-right"></i> Ir para a área</a>
                 </div>
 
-                <!-- Tópico 4.4 -->
+                <!-- Tópico 16 -->
                 <div class="topico-card">
                     <div class="topico-header">
                         <div class="topico-icon">🎭</div>
@@ -671,7 +670,7 @@
                         <li class="subtopico-item"><i class="fas fa-circle"></i> Patrimônio material e imaterial</li>
                         <li class="subtopico-item"><i class="fas fa-circle"></i> IPHAN e tombamento</li>
                     </ul>
-                    <a href="#" class="btn-aula"><i class="fas fa-play-circle"></i> Assistir aula</a>
+                    <a href="16arte.html" class="btn-area"><i class="fas fa-arrow-right"></i> Ir para a área</a>
                 </div>
 
             </div>
