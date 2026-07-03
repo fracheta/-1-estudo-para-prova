@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudos+ | Aulas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #0b0c17;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent-purple: #8b5cf6;
+            --accent-gold: #f59e0b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --radius-xl: 24px;
+            --radius-lg: 18px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: radial-gradient(ellipse at top, #1a1f3a, #0b0c17 70%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 1.5rem 1rem 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #c084fc, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .logo i {
+            background: none;
+            -webkit-text-fill-color: #c084fc;
+            font-size: 2rem;
+        }
+
+        .voltar {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .voltar:hover {
+            color: #fff;
+        }
+
+        /* Título da página */
+        .page-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .page-title i {
+            color: var(--accent-purple);
+        }
+
+        /* Grid de áreas */
+        .areas-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .area-section {
+            background: rgba(255, 255, 255, 0.025);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            padding: 1.8rem 2rem;
+            transition: var(--transition);
+        }
+
+        .area-section:hover {
+            border-color: rgba(139, 92, 246, 0.25);
+        }
+
+        .area-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .area-header i {
+            font-size: 2rem;
+            color: var(--accent-purple);
+        }
+
+        .area-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* Grid de matérias (cards) */
+        .materias-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .materia-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .materia-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem 1.2rem;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            height: 100%;
+        }
+
+        .materia-card:hover {
+            background: rgba(139, 92, 246, 0.12);
+            border-color: rgba(139, 92, 246, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .materia-card i {
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, #c084fc, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .materia-card h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .materia-card small {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 600px) {
+            .materias-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <a href="10.html" class="logo">
+                <i class="fas fa-brain"></i> Estudos+
+            </a>
+            <a href="10.html" class="voltar">
+                <i class="fas fa-arrow-left"></i> Voltar ao início
+            </a>
+        </header>
+
+        <!-- Título -->
+        <h1 class="page-title">
+            <i class="fas fa-chalkboard-teacher"></i> Aulas
+        </h1>
+
+        <!-- Áreas e matérias -->
+        <div class="areas-container">
+            <!-- Linguagens, Códigos e suas Tecnologias -->
+            <div class="area-section">
+                <div class="area-header">
+                    <i class="fas fa-language"></i>
+                    <h2>Linguagens, Códigos e suas Tecnologias</h2>
+                </div>
+                <div class="materias-grid">
+                    <a href="arte.html" class="materia-link">
+                        <div class="materia-card">
+                            <i class="fas fa-paint-brush"></i>
+                            <h3>Arte</h3>
+                            <small>História da arte, movimentos artísticos</small>
+                        </div>
+                    </a>
+                    <a href="educacao-fisica.html" class="materia-link">
+                        <div class="materia-card">
+                            <i class="fas fa-running"></i>
+                            <h3>Educação Física</h3>
+                            <small>Saúde, esportes e corpo humano</small>
+                        </div>
+                    </a>
+                    <a href="espanhol.html" class="materia-link">
+                        <div class="materia-card">
+                            <i class="fas fa-globe"></i>
+                            <h3>Língua Espanhola</h3>
+                            <small>Gramática e interpretação</small>
+                        </div>
+                    </a>
+                    <a href="ingles.html" class="materia-link">
+                        <div class="materia-card">
+                            <i class="fas fa-flag-usa"></i>
+                            <h3>Língua Inglesa</h3>
+                            <small>Reading, listening e gramática</small>
+                        </div>
+                    </a>
+                    <a href="portugues.html" class="materia-link">
+                        <div class="materia-card">
+                            <i class="fas fa-comment-alt"></i>
+                            <h3>Língua Portuguesa</h3>
+                            <small>Gramática, literatura e redação</small>
+                        </div>
+                    </a>
+                    <a href="literatura.html" class="materia-link">
+                        <div class="materia-card">
+                            <i class="fas fa-book"></i>
+                            <h3>Literatura</h3>
+                            <small>Escolas literárias, análise de obras</small>
+                        </div>
+                    </a>
+                    <a href="redacao.html" class="materia-link">
+                        <div class="materia-card">
+                            <i class="fas fa-pen"></i>
+                            <h3>Redação</h3>
+                            <small>Dissertação, estrutura e argumentação</small>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Ciências da Natureza e suas Tecnologias -->
+            <div class="area-section">
+                <div class="area-header">
+                    <i class="fas fa-leaf"></i>
+                    <h2>Ciências da Natureza e suas Tecnologias</h2>
+                </div>
+                <div class="materias-grid">
+                    <a href="biologia.html" class="materia-link">
+                        <div class="materia-card">
+                            <i class="fas fa-dna"></i>
+                            <h3>Biologia</h3>
+                            <small>Ecologia, genética, fisiologia</small>
+                        </div>
+                    </a>
+                    <a href="fisica.html" class="materia-link">
+                        <div class="materia-card">
+                            <i class="fas fa-atom"></i>
+                            <h3>Física</h3>
+                            <small>Mecânica, termologia, óptica</small>
+                        </div>
+                    </a>
+                    <a href="quimica.html" class="materia-link">
+                        <div class="materia-card">
+                            <i class="fas fa-flask"></i>
+                            <h3>Química</h3>
+                            <small>Reações, estequiometria, orgânica</small>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Ciências Humanas e suas Tecnologias -->
+            <div class="area-section">
+                <div class="area-header">
+                    <i class="fas fa-globe-americas"></i>
+                    <h2>Ciências Humanas e suas Tecnologias</h2>
+                </div>
+                <div class="materias-grid">
+                    <a href="filosofia.html" class="materia-link">
+                        <div class="materia-card">
+                            <i class="fas fa-brain"></i>
+                            <h3>Filosofia</h3>
+                            <small>Ética, política, pensadores clássicos</small>
+                        </div>
+                    </a>
+                    <a href="geografia.html" class="materia-link">
+                        <div class="materia-card">
+                            <i class="fas fa-mountain"></i>
+                            <h3>Geografia</h3>
+                            <small>Geopolítica, clima, urbanização</small>
+                        </div>
+                    </a>
+                    <a href="historia.html" class="materia-link">
+                        <div class="materia-card">
+                            <i class="fas fa-landmark"></i>
+                            <h3>História</h3>
+                            <small>Brasil, geral, contemporânea</small>
+                        </div>
+                    </a>
+                    <a href="sociologia.html" class="materia-link">
+                        <div class="materia-card">
+                            <i class="fas fa-users"></i>
+                            <h3>Sociologia</h3>
+                            <small>Cultura, desigualdade, movimentos sociais</small>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Matemática e suas Tecnologias -->
+            <div class="area-section">
+                <div class="area-header">
+                    <i class="fas fa-calculator"></i>
+                    <h2>Matemática e suas Tecnologias</h2>
+                </div>
+                <div class="materias-grid">
+                    <a href="matematica.html" class="materia-link">
+                        <div class="materia-card">
+                            <i class="fas fa-square-root-alt"></i>
+                            <h3>Matemática</h3>
+                            <small>Álgebra, geometria, estatística</small>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rodapé -->
+        <footer class="footer">
+            <p>© 2026 Estudos+ | Aulas preparatórias para o ENEM</p>
+        </footer>
+    </div>
+</body>
+</html>
