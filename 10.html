@@ -42,7 +42,6 @@
             position: relative;
         }
 
-        /* Fundo animado com gradiente sutil */
         body::before {
             content: '';
             position: fixed;
@@ -109,7 +108,7 @@
             color: var(--accent-gold);
         }
 
-        /* Seção de boas-vindas com mensagem motivacional */
+        /* Banner */
         .welcome-banner {
             background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(245, 158, 11, 0.1));
             border-radius: var(--radius-xl);
@@ -142,7 +141,7 @@
             opacity: 0.9;
         }
 
-        /* Grid principal de atalhos (Aulas, Material, IA) */
+        /* Grid de atalhos principais */
         .main-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -209,7 +208,7 @@
             color: var(--accent-gold);
         }
 
-        /* Seção de Progresso Rápido */
+        /* Progresso */
         .progress-section {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(16px);
@@ -251,8 +250,8 @@
 
         .progress-circle {
             stroke: url(#gradientProgress);
-            stroke-dasharray: 251.2; /* 2 * PI * 40 ≈ 251.2 */
-            stroke-dashoffset: 75; /* 70% progresso (251.2 * 0.3 ≈ 75) */
+            stroke-dasharray: 251.2;
+            stroke-dashoffset: 75;
             transition: stroke-dashoffset 1s ease;
         }
 
@@ -298,7 +297,7 @@
             font-size: 1.5rem;
         }
 
-        /* Matérias - grid de ícones */
+        /* Título de seção */
         .section-title {
             font-size: 1.5rem;
             font-weight: 700;
@@ -308,11 +307,12 @@
             gap: 0.5rem;
         }
 
+        /* Matérias resumidas */
         .materias-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 1.2rem;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .materia-card {
@@ -342,6 +342,91 @@
             font-size: 1rem;
         }
 
+        /* NOVA SEÇÃO: Aulas por Área */
+        .aulas-areas {
+            margin: 3rem 0;
+        }
+
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .area-card {
+            background: rgba(255, 255, 255, 0.025);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .area-card:hover {
+            border-color: rgba(139, 92, 246, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .area-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .area-header i {
+            font-size: 1.8rem;
+            color: var(--accent-purple);
+        }
+
+        .area-header h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .aulas-lista {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .aula-item {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.5rem 0.7rem;
+            border-radius: 10px;
+            transition: background 0.2s;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .aula-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .aula-item i {
+            font-size: 1rem;
+            color: var(--accent-gold);
+            width: 20px;
+            text-align: center;
+        }
+
+        .aula-item span {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .aula-item:hover span {
+            color: #fff;
+        }
+
         /* Rodapé */
         .footer {
             text-align: center;
@@ -353,30 +438,15 @@
         }
 
         @keyframes fadeSlideUp {
-            from {
-                opacity: 0;
-                transform: translateY(25px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsivo */
         @media (max-width: 768px) {
-            .welcome-banner {
-                flex-direction: column;
-                text-align: center;
-            }
-            .progress-section {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .streak {
-                margin-left: 0;
-                align-self: center;
-            }
+            .welcome-banner { flex-direction: column; text-align: center; }
+            .progress-section { flex-direction: column; align-items: flex-start; }
+            .streak { margin-left: 0; align-self: center; }
+            .areas-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -453,7 +523,7 @@
             </div>
         </div>
 
-        <!-- Matérias -->
+        <!-- Matérias resumidas (atalhos rápidos) -->
         <h3 class="section-title"><i class="fas fa-layer-group"></i> Matérias</h3>
         <div class="materias-grid">
             <div class="materia-card">
@@ -475,6 +545,67 @@
             <div class="materia-card">
                 <i class="fas fa-pen-fancy"></i>
                 <h5>Redação</h5>
+            </div>
+        </div>
+
+        <!-- NOVA SEÇÃO: Aulas por Área do Conhecimento -->
+        <div class="aulas-areas">
+            <h3 class="section-title"><i class="fas fa-list-alt"></i> Aulas por Área</h3>
+            <div class="areas-grid">
+                <!-- Linguagens, Códigos e suas Tecnologias -->
+                <div class="area-card">
+                    <div class="area-header">
+                        <i class="fas fa-language"></i>
+                        <h3>Linguagens, Códigos e suas Tecnologias</h3>
+                    </div>
+                    <ul class="aulas-lista">
+                        <li class="aula-item"><i class="fas fa-paint-brush"></i> <span>Arte</span></li>
+                        <li class="aula-item"><i class="fas fa-running"></i> <span>Educação Física</span></li>
+                        <li class="aula-item"><i class="fas fa-globe"></i> <span>Língua Espanhola</span></li>
+                        <li class="aula-item"><i class="fas fa-flag-usa"></i> <span>Língua Inglesa</span></li>
+                        <li class="aula-item"><i class="fas fa-comment-alt"></i> <span>Língua Portuguesa</span></li>
+                        <li class="aula-item"><i class="fas fa-book"></i> <span>Literatura</span></li>
+                        <li class="aula-item"><i class="fas fa-pen"></i> <span>Redação</span></li>
+                    </ul>
+                </div>
+
+                <!-- Ciências da Natureza e suas Tecnologias -->
+                <div class="area-card">
+                    <div class="area-header">
+                        <i class="fas fa-leaf"></i>
+                        <h3>Ciências da Natureza e suas Tecnologias</h3>
+                    </div>
+                    <ul class="aulas-lista">
+                        <li class="aula-item"><i class="fas fa-dna"></i> <span>Biologia</span></li>
+                        <li class="aula-item"><i class="fas fa-atom"></i> <span>Física</span></li>
+                        <li class="aula-item"><i class="fas fa-flask"></i> <span>Química</span></li>
+                    </ul>
+                </div>
+
+                <!-- Ciências Humanas e suas Tecnologias -->
+                <div class="area-card">
+                    <div class="area-header">
+                        <i class="fas fa-globe-americas"></i>
+                        <h3>Ciências Humanas e suas Tecnologias</h3>
+                    </div>
+                    <ul class="aulas-lista">
+                        <li class="aula-item"><i class="fas fa-brain"></i> <span>Filosofia</span></li>
+                        <li class="aula-item"><i class="fas fa-mountain"></i> <span>Geografia</span></li>
+                        <li class="aula-item"><i class="fas fa-landmark"></i> <span>História</span></li>
+                        <li class="aula-item"><i class="fas fa-users"></i> <span>Sociologia</span></li>
+                    </ul>
+                </div>
+
+                <!-- Matemática e suas Tecnologias -->
+                <div class="area-card">
+                    <div class="area-header">
+                        <i class="fas fa-calculator"></i>
+                        <h3>Matemática e suas Tecnologias</h3>
+                    </div>
+                    <ul class="aulas-lista">
+                        <li class="aula-item"><i class="fas fa-square-root-alt"></i> <span>Matemática</span></li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -512,7 +643,6 @@
             if (span) span.textContent = dias > 0 ? `${dias} dias` : 'poucos dias';
         }
 
-        // Animação da barra de progresso (opcional, define o dashoffset)
         function setProgress(percent) {
             const circle = document.getElementById('progressCircle');
             if (circle) {
@@ -525,12 +655,10 @@
             }
         }
 
-        // Inicializações
         atualizarSaudacao();
         atualizarDiasEnem();
-        setProgress(70); // Define 70% de progresso
+        setProgress(70);
 
-        // Atualiza saudação a cada minuto (para trocar entre tarde/noite)
         setInterval(atualizarSaudacao, 60000);
     </script>
 </body>
